@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/newEvent', [App\Http\Controllers\EventController::class, 'create'])->name('newEvent');
+Route::post('/newEventStore', [App\Http\Controllers\EventController::class, 'store'])->name('newEventStore');

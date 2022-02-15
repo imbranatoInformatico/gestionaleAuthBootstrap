@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
+
 
 class EventController extends Controller
 {
@@ -25,7 +27,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('newEvent');
+        $idAdmin=Auth::id();
+
+        return view('newEvent', compact('idAdmin'));
     }
 
     /**
@@ -36,7 +40,23 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //verifichiamo i dati in arrivo con il validate
+       $request->validate([
+            'idAdmin' => 'required ',
+            'codiceEvento' => 'required | unique:events', 
+            'nome' => 'required',
+            'tipo' => 'required',
+            'descrizione' => 'required'
+        ]);
+
+      Event::create([
+            'idAmministratore' => (int)$request->idAdmin,  //lo converto per sicurezza in un int
+            'codiceEvento' => (int)$request->codiceEvento, //lo converto per sicurezza in un int
+            'nome' => $request->nome,
+            'tipo' => $request->tipo,
+            'descrizione' => $request->descrizione
+        ]); 
+
     }
 
     /**

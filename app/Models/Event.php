@@ -9,5 +9,5 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['idAmministratore','nome','tipo','descrizione'];
+    protected $fillable = ['idAmministratore','codiceEvento','nome','tipo','descrizione'];
 }
