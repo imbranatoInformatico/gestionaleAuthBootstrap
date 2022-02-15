@@ -11286,3 +11286,46 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+main {
+  background-color: #EDE7E7;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .loginWrap {
+  display: flex;
+  height: 600px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.16);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+main .loginWrap .form-gest {
+  width: 80%;
+}
+main label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  padding-left: 5px;
+}
+main .form-input-text,
+main .form-select {
+  height: 50px;
+  width: 100%;
+  padding-left: 5px;
+}
+main .form-submit-button {
+  margin-top: 50px;
+  height: 50px;
+  width: 100%;
+  background-color: #66d9d9;
+  text-transform: uppercase;
+  color: #fff;
+}
+main .form-submit-button:hover {
+  background-color: #7eebeb;
+}
