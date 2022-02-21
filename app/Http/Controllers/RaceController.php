@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
+use App\Models\Race;
 
-
-class EventController extends Controller
+class RaceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        dd($events);
+        //
     }
 
     /**
@@ -25,11 +23,11 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($codiceEvento)
     {
-        $idAdmin=Auth::id();
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
 
-        return view('newEvent', compact('idAdmin'));
+        return view('newRace', compact('eventDash'));
     }
 
     /**
@@ -40,33 +38,31 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //verifichiamo i dati in arrivo con il validate
-       $request->validate([
-            'idAdmin' => 'required ',
-            'codiceEvento' => 'required | unique:events', 
-            'nome' => 'required',
-            'tipo' => 'required',
-            'descrizione' => 'required'
+       // dd($request->all());
+
+        $request->validate([
+            "codiceEvento" => 'required',
+            "nome" => 'required',
+            "circuito" => 'required',
+            "costo" => 'required',
+            "data" => 'required',
         ]);
     
         try {
-            Event::create([
-                'idAmministratore' => (int)$request->idAdmin,  //lo converto per sicurezza in un int
-                'codiceEvento' => (int)$request->codiceEvento, //lo converto per sicurezza in un int
-                'nome' => $request->nome,
-                'tipo' => $request->tipo,
-                'descrizione' => $request->descrizione
-            ]); 
+            Race::create([
+                        "nome" => $request->nome,
+                        "circuito" => $request->circuito,
+                        "costoGara" => $request->costo,
+                        "dataGara" => $request->data,
+                        "idEvento" => $request->codiceEvento,
+            ])->events()->attach($request->codiceEvento);
 
-            return redirect('home')->with('message','Evento creato con successo');
+
+            return redirect()->route('newRace',$request->codiceEvento)->with('message','Gara creata con successo');
         }
         catch(\Exception $ex){
-            return redirect('showDaFormCrea')->with('message','Mi spiace qualcosa è andato storto'.$ex);
+            return redirect()->route('newRace',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
         }
-      
-
-       // return view('dashboard');
-
     }
 
     /**

@@ -11286,6 +11286,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+a {
+  text-decoration: none;
+}
+
 main {
   background-color: #EDE7E7;
   height: calc(100vh - 80px);
@@ -11306,7 +11310,7 @@ main .loginWrap {
 main .loginWrap .form-gest {
   width: 80%;
 }
-main label {
+main .labelForm {
   margin-top: 10px;
   margin-bottom: 10px;
   text-transform: capitalize;
@@ -11319,7 +11323,7 @@ main .form-select {
   padding-left: 5px;
 }
 main .form-submit-button {
-  margin-top: 50px;
+  margin-top: 30px;
   height: 50px;
   width: 100%;
   background-color: #66d9d9;
@@ -11328,4 +11332,116 @@ main .form-submit-button {
 }
 main .form-submit-button:hover {
   background-color: #7eebeb;
+}
+
+.colonnaNavSx {
+  background-color: #fff;
+  height: calc(100vh - 80px);
+}
+
+.colonnaDestra {
+  background-color: #fff;
+  height: calc(100vh - 80px);
+}
+
+.mainDash {
+  background-color: #EDE7E7;
+  height: calc(100vh - 80px);
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.mainDash aside {
+  width: 200px;
+  background-color: #3b3b3b;
+  height: 100%;
+}
+.mainDash aside .asideBlocco {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+.mainDash aside .asideBlocco .bloccoTitolo {
+  width: 100%;
+  height: auto;
+  background-color: #3b3b3b;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.mainDash aside .asideBlocco .bloccoTitolo span {
+  color: #fff;
+  font-size: 15px;
+}
+.mainDash aside .asideBlocco .bloccoTitolo .title {
+  margin-left: 5px;
+}
+.mainDash aside .asideBlocco .bloccoTitolo .arrow {
+  padding-left: 25px;
+}
+.mainDash aside .asideBlocco .bloccoTitolo:hover {
+  background-color: #f33e3e;
+}
+.mainDash aside .asideBlocco .bloccoTitolo:active {
+  background-color: #f33e3e;
+}
+.mainDash aside .asideBlocco .bloccoMenu {
+  background-color: #868585;
+}
+.mainDash aside .asideBlocco .bloccoMenu ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+.mainDash aside .asideBlocco .bloccoMenu ul .item {
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+.mainDash aside .asideBlocco .bloccoMenu ul .item:hover {
+  color: #f57b7b;
+}
+.mainDash aside .asideBlocco .bloccoMenu ul .item:hover::before {
+  content: "-";
+  width: 1px;
+  height: auto;
+  margin-right: 15px;
+  background-color: #f57b7b;
+}
+.mainDash aside a {
+  color: #fff;
+}
+.mainDash .dashCenter {
+  height: 100%;
+  width: 100%;
+}
+.mainDash .dashCenter .boxNomeEvento {
+  padding-top: 10px;
+  background-color: #fff;
+  width: 100%;
+  height: 100px;
+  box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.16);
+  color: #f57b7b;
+}
+.mainDash .dashCenter .boxNomeEvento .nomeCampionato {
+  color: #000;
+  text-transform: uppercase;
+}
+.mainDash .dashCenter .boxNomeOrganizzatore {
+  padding-top: 10px;
+  background-color: #fff;
+  width: 100%;
+  height: 100px;
+  box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.16);
+  color: #f57b7b;
+}
+.mainDash .dashCenter .boxNomeOrganizzatore .nomeOrganizzatore {
+  color: #000;
+}
+.mainDash .dashCenter .boxFormInserimento {
+  height: auto;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.16);
 }

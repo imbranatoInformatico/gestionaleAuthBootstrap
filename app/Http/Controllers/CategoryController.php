@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 use App\Models\Event;
 
-
-class EventController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($codiceEvento)
     {
-        $events = Event::all();
-        dd($events);
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+
+        return view('categoryList', compact('eventDash'));
+
     }
 
     /**
@@ -25,11 +26,10 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($codiceEvento)
     {
-        $idAdmin=Auth::id();
-
-        return view('newEvent', compact('idAdmin'));
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        return view('newCategory', compact('eventDash'));
     }
 
     /**
@@ -42,31 +42,23 @@ class EventController extends Controller
     {
         //verifichiamo i dati in arrivo con il validate
        $request->validate([
-            'idAdmin' => 'required ',
-            'codiceEvento' => 'required | unique:events', 
-            'nome' => 'required',
-            'tipo' => 'required',
-            'descrizione' => 'required'
+        'nome' => 'required | unique:categories',
+        'descrizione' => 'required', 
+        'codiceEvento' => 'required', 
         ]);
-    
+
         try {
-            Event::create([
-                'idAmministratore' => (int)$request->idAdmin,  //lo converto per sicurezza in un int
-                'codiceEvento' => (int)$request->codiceEvento, //lo converto per sicurezza in un int
+            Category::create([
                 'nome' => $request->nome,
-                'tipo' => $request->tipo,
-                'descrizione' => $request->descrizione
+                'descrizione' => $request->descrizione,
+                'idEvento' => $request->codiceEvento
             ]); 
 
-            return redirect('home')->with('message','Evento creato con successo');
+            return redirect()->route('newCategory',$request->codiceEvento)->with('message','Categoria creata con successo');
         }
         catch(\Exception $ex){
-            return redirect('showDaFormCrea')->with('message','Mi spiace qualcosa è andato storto'.$ex);
+            return redirect()->route('newCategory',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
         }
-      
-
-       // return view('dashboard');
-
     }
 
     /**

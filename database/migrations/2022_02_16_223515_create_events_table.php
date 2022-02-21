@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->integer('codiceEvento');
             $table->string('nome');
             $table->string('tipo');
-            $table->string('descrizione');
+            $table->string('descrizione')->nullable();
             $table->timestamps();
             //qui eseguo la chiave esterna sulla tabella users
             $table->foreign('idAmministratore')->references('id')->on('users')->onCascade('delete');

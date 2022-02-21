@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use App\Models\Event;
 
 
-class EventController extends Controller
+
+
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +19,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        dd($events);
+
+        return view('dashboard');
     }
 
     /**
@@ -27,9 +30,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $idAdmin=Auth::id();
-
-        return view('newEvent', compact('idAdmin'));
+        //
     }
 
     /**
@@ -40,33 +41,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //verifichiamo i dati in arrivo con il validate
-       $request->validate([
-            'idAdmin' => 'required ',
-            'codiceEvento' => 'required | unique:events', 
-            'nome' => 'required',
-            'tipo' => 'required',
-            'descrizione' => 'required'
-        ]);
-    
-        try {
-            Event::create([
-                'idAmministratore' => (int)$request->idAdmin,  //lo converto per sicurezza in un int
-                'codiceEvento' => (int)$request->codiceEvento, //lo converto per sicurezza in un int
-                'nome' => $request->nome,
-                'tipo' => $request->tipo,
-                'descrizione' => $request->descrizione
-            ]); 
-
-            return redirect('home')->with('message','Evento creato con successo');
-        }
-        catch(\Exception $ex){
-            return redirect('showDaFormCrea')->with('message','Mi spiace qualcosa è andato storto'.$ex);
-        }
-      
-
-       // return view('dashboard');
-
+        //
     }
 
     /**
@@ -75,9 +50,16 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        //con il valore in arrivo c'è da fare una query che sputi fuori il record con codice evento arrivato
+        $eventDash = DB::table('events')
+        ->Join('users','events.idAmministratore','=','users.id')
+        ->where('codiceEvento', $request->selectEventi)
+        ->first();
+        //dd($eventDash);
+        return view('dashboard', compact("eventDash"));
+        return view('newCategory', compact("eventDash"));
     }
 
     /**
