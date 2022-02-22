@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\Team;
 use App\Models\Pilot;
+use App\Models\Race;
 
 
 class PilotController extends Controller
@@ -26,7 +27,9 @@ class PilotController extends Controller
         ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','teams.nome as nomeTeam')
         ->get();
 
-        return view('pilotList', compact('eventDash', 'pilotList'));
+        $categories = Category::where('idEvento',$codiceEvento)->get();
+
+        return view('pilotList', compact('eventDash', 'pilotList','categories'));
     }
 
     /**
@@ -95,6 +98,39 @@ class PilotController extends Controller
         //
     }
 
+    public function reservation($codiceEvento, $id)
+    {
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $races = Race::where('idEvento',$codiceEvento)->get();
+        $pilot = Pilot::where('id',$id)->get();
+
+        return view('newReservation', compact('eventDash','races','pilot'));
+    }
+
+    public function reservationStore(Request $request)
+    {
+        //dd($request->all());
+        try { 
+
+            $request->validate([
+                "codicePilota" => 'required | unique',
+                "idGara" => 'required',    
+            ]);
+
+        $pilot = Pilot::find($request->codicePilota);
+        
+        $pilot->races()->attach($request->idGara);
+
+        
+        return redirect()->route('pilotList',$request->codiceEvento)->with('message','Prenotazione pilota avvenuta con successo');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('pilotList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
+        
+
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

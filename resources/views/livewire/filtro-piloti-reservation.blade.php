@@ -5,19 +5,23 @@
             <input class="form-input-text " name="" wire:model="search" type="search" placeholder="Cerca il pilota.." value="" >
         </div>
         <div class="col-md-4">
-                <label class="labelForm" for="">Categoria</label>
+                <label class="labelForm" for="">Gare</label>
                  <select class="form-select" wire:model="searchSelect" name="categoria" id="">
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->nome }}</option>
+                    <option value="0">Seleziona la gara..</option>
+                    @foreach ($races as $race)
+                        <option value="{{ $race->id }}">{{ $race->nome }}</option>
                     @endforeach
                  </select>
         </div>
         <div class="col-md-4  ">
             <label class="labelForm" for="">Paginazione</label>
-            {{$pilotList->links()}}
+        @if (!empty($pilotList))
+                {{$pilotList->links()}}
+            @endif 
+
         </div>
     </div>
-   
+    @if (!empty($pilotList))
     <table id="tablePilot" class="table table-responsive">
         <thead class="table-dark">
           <tr class="text-center">
@@ -58,5 +62,26 @@
             </tr>
             @endforeach 
         </tbody>
-    </table>
+    </table> 
+    @else
+    <table id="tablePilot" class="table table-responsive">
+        <thead class="table-dark">
+          <tr class="text-center">
+              <td>AVATAR</td>
+              <td>NOME</td>
+              <td>COGNOME</td>
+              <td>CATEGORIA</td>
+              <td>TEAM</td>
+              <td>PRENOTA</td>
+              <td>SCHEDA</td>
+              <td>MODIFICA</td>
+              <td>ELIMINA</td>
+          </tr>
+        </thead>
+        <tbody class="table-light">
+            <td colspan="9" class="text-center">Nessun pilota trovato nelle prenotazioni!</td>
+        </tbody>
+    </table> 
+    @endif
+   
 </div>

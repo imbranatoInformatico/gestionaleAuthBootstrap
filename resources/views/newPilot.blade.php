@@ -18,7 +18,7 @@
             <h3>Registra nuovo pilota in {{ $eventDash->nome }} </h3>
         </div>
     </div>
-    <div class="rowpt-2 ps-3 pe-3">
+    <div class="row pt-2 ps-3 pe-3">
         <div class="col-md-12 ">
             <div class="boxFormInserimento ps-3 pe-3 py-3">
                 <form method="post" action="{{ url('newPilotStore') }}">

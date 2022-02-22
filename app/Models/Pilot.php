@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Event;
+use App\Models\Race;
 
 class Pilot extends Model
 {
@@ -18,11 +19,6 @@ class Pilot extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function events()
-    {
-        return $this->belongsToMany(Event::class, 'event_pilot');
-    }
-
     public function categories()
     {
         return $this->belongsTo(Category::class);
@@ -32,4 +28,14 @@ class Pilot extends Model
     {
         return $this->belongsTo(Team::class);
     }
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_pilot');
+    }
+    public function races()
+    {
+        return $this->belongsToMany(Race::class,'race_pilot');
+    }
+
+ 
 }

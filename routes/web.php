@@ -38,6 +38,10 @@ Route::post('/newPilotStore', [App\Http\Controllers\PilotController::class, 'sto
 Route::get('/pilotList/{codiceEvento}', [App\Http\Livewire\FiltroPiloti::class, 'pilotListIndex'])->name('pilotList');
 Route::get('/editPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'edit'])->name('editPilot');
 Route::put('/updatePilot/{id}', [App\Http\Controllers\PilotController::class, 'update'])->name('updatePilot');
+Route::get('/pilotReservation/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'reservation'])->name('pilotReservation');
+Route::post('/reservationPilotStore', [App\Http\Controllers\PilotController::class, 'reservationStore'])->name('reservationPilotStore');
+Route::get('/reservationPilotList/{codiceEvento}', [App\Http\Livewire\FiltroPilotiReservation::class, 'reservationPilotListIndex'])->name('reservationPilotList');
+
 
 //rotte per prenotazione pilota 
 Route::get('/newReservation/{codiceEvento}', [App\Http\Controllers\ReservationController::class, 'create'])->name('newReservation');

@@ -24,7 +24,7 @@
         <h3>Lista piloti iscritti a {{ $eventDash->nome }} </h3>
     </div>
 </div>
-@livewire('filtro-piloti', ['eventDash' => $eventDash, 'categories'=> $categories])
+@livewire('filtro-piloti-reservation', ['eventDash' => $eventDash,'races' => $races])
 
 
 </div>
@@ -32,4 +32,3 @@
 @livewireScripts
 
 @endsection
-

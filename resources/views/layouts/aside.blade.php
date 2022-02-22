@@ -60,6 +60,24 @@
         </div>
     </div>
     <div class="asideBlocco">
+        <div class="bloccoTitolo" data-bs-toggle="collapse" href="#collapseExample4"  aria-expanded="false" aria-controls="collapseExample4">                 
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="las la-ticket-alt"></span>
+                    <span class="title">Prenota</span>
+                </div>
+                <div class="col-md-5">
+                    <span class="arrow las la-angle-down" ></span>
+                </div>
+            </div>
+        </div> 
+        <div class="bloccoMenu collapse" id="collapseExample4">
+            <ul>
+                <li class="item"><a href="{{ route('reservationPilotList',['codiceEvento'=> $eventDash->codiceEvento])}}">Lista prenotati</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="asideBlocco">
         <div class="bloccoTitolo">
             <span class="las la-cog"></span>
             <span class="title"><a href="{{ route('impostazioniIndex') }}">Impostazioni</a> </span>

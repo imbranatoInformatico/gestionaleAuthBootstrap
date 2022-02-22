@@ -12,11 +12,15 @@ use App\Models\Team;
 class FiltroPiloti extends Component
 {
     public $search;
+    public $searchSelect;
     public $eventDash;
+    public $categories;
+
  
     protected $queryString = ['search'];
 
-    public function pilotListIndex($codiceEvento){
+    public function pilotListIndex($codiceEvento)
+    {
 
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
         $pilotList = DB::table('pilots')
@@ -25,10 +29,14 @@ class FiltroPiloti extends Component
         ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','teams.nome as nomeTeam')
         ->get();
         //dd($pilotList);
-        return view('pilotList', compact('eventDash', 'pilotList'));
+        //dd($categories);
+        $categories = Category::where('idEvento',$codiceEvento)->get();
+
+        return view('pilotList', compact('eventDash', 'pilotList','categories'));
 
     }
 
+  
 
 
     public function render()
@@ -39,7 +47,8 @@ class FiltroPiloti extends Component
                                 ->where('pilots.nome', 'like', '%'.$this->search.'%')
                                 ->orWhere('pilots.cognome', 'like', '%'.$this->search.'%')
                                 ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','teams.nome as nomeTeam')
-                                ->get(),
+                                ->paginate(10),
+
         ]);
     }
 }
