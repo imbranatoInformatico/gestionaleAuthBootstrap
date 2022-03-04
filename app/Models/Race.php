@@ -24,7 +24,7 @@ class Race extends Model
 
     public function pilots()
     {
-        return $this->belongsToMany(Pilot::class,'race_pilot');
+        return $this->belongsToMany(Pilot::class,'race_pilot')->withPivot('partecipazione');
     }
 
 }

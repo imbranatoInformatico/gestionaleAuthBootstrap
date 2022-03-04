@@ -113,7 +113,7 @@ class PilotController extends Controller
         try { 
 
             $request->validate([
-                "codicePilota" => 'required | unique',
+                "codicePilota" => 'required',
                 "idGara" => 'required',    
             ]);
 
@@ -129,6 +129,29 @@ class PilotController extends Controller
         }
         
 
+
+    }
+
+    public function presence(Request $request, $id)
+    {
+       // dd($request->all());
+        try {
+       
+        $pilot = Pilot::find($request->pilota_id);
+
+        $pilot->races()->update([
+            'partecipazione' => 1,
+            'incasso' => $request->incasso,
+            'note' => $request->note
+        ]);
+
+        return redirect()->route('reservationPilotList',$request->codiceEvento)->with('message','Pilota creato con successo');
+        }
+        catch(\Exception $ex){
+        return redirect()->route('reservationPilotList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
+
+  
 
     }
     /**

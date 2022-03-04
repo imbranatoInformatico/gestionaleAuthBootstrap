@@ -41,6 +41,7 @@ Route::put('/updatePilot/{id}', [App\Http\Controllers\PilotController::class, 'u
 Route::get('/pilotReservation/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'reservation'])->name('pilotReservation');
 Route::post('/reservationPilotStore', [App\Http\Controllers\PilotController::class, 'reservationStore'])->name('reservationPilotStore');
 Route::get('/reservationPilotList/{codiceEvento}', [App\Http\Livewire\FiltroPilotiReservation::class, 'reservationPilotListIndex'])->name('reservationPilotList');
+Route::put('/pilotPresence/{id}', [App\Http\Controllers\PilotController::class, 'presence'])->name('pilotPresence');
 
 
 //rotte per prenotazione pilota 

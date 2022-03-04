@@ -19,6 +19,9 @@ class CreateRacePilotTable extends Migration
             $table->unsignedBigInteger('race_id');
             $table->foreign('pilot_id')->references('id')->on('pilots')->onDelete('cascade');
             $table->foreign('race_id')->references('id')->on('races')->onDelete('cascade');
+            $table->boolean('partecipazione')->nullable();
+            $table->integer('incasso')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
