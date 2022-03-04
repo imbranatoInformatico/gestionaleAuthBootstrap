@@ -21,7 +21,7 @@
             {{ session('message') }}
         </div>
         @endif
-        <h3>Lista piloti iscritti a {{ $eventDash->nome }} </h3>
+        <h3>Lista piloti prenotati </h3>
     </div>
 </div>
 @livewire('filtro-piloti-reservation', ['eventDash' => $eventDash,'races' => $races])

@@ -18,5 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('checkPilotList/{race_id}', [App\Http\Livewire\FiltroPilotiReservation::class, 'checkListPilot']);
+//endpoint per leggere i piloti checkati
+Route::get('/checkPilotList', [App\Http\Controllers\api\PilotCheckListController::class, 'index']);
