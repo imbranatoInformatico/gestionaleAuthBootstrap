@@ -14,3 +14,5 @@ require('./bootstrap');
 
 require('./components/TableCheck');
 require('./components/RowTableCheck');
+require('./myJs/search');
+

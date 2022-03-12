@@ -180,6 +180,13 @@ main {
             background-color: #fff;
             box-shadow: 0 0 22px 0 rgb(0 0 0 / 16%);
         }
+        .contenitoreTable {
+            height: 650px;
+            overflow: auto;
+            .tablePilotListPrenotati{
+                height: auto;
+            }
+        }
     }
     
 }

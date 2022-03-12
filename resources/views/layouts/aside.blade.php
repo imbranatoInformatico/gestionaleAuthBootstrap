@@ -73,7 +73,10 @@
         </div> 
         <div class="bloccoMenu collapse" id="collapseExample4">
             <ul>
-                <li class="item"><a href="{{ route('reservationPilotList',['codiceEvento'=> $eventDash->codiceEvento])}}">Lista prenotati</a></li>
+                <li class="item"><a href="{{ route('raceSelectReservation',['codiceEvento'=> $eventDash->codiceEvento])}}">Lista prenotati alla gara</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="">Lista presenti</a></li>
             </ul>
         </div>
     </div>

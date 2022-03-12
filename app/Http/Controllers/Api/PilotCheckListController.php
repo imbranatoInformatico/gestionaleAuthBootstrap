@@ -14,12 +14,14 @@ class PilotCheckListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         $listCheck = DB::table('race_pilot')
                         ->join('pilots','race_pilot.pilot_id','=','pilots.id')
                         ->join('categories','categories.id','=','pilots.idCategoria')
                         ->where('partecipazione',1)
+                        ->where('race_id',$request->race_id)
                         ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
                         ->get();
         return $listCheck;
@@ -77,7 +79,10 @@ class PilotCheckListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('race_pilot')->where('pilot_id', $id)->update(['partecipazione' => 0]);
+        $listCheckUpdate = DB::table('race_pilot')->where('partecipazione',1);
+    //    return DB::table('race_pilot')->where('partecipazione',0)->json_encode();
+        return response()->json($listCheckUpdate);
     }
 
     /**

@@ -4,15 +4,7 @@
             <label class="labelForm" for="">Filtra il pilota </label>
             <input class="form-input-text " name="" wire:model="search" type="search" placeholder="Cerca il pilota.." value="" >
         </div>
-        <div class="col-md-4">
-                <label class="labelForm" for="">Gare</label>
-                 <select class="form-select" wire:model="searchSelect" name="categoria" id="">
-                    <option value="0">Seleziona la gara..</option>
-                    @foreach ($races as $race)
-                        <option value="{{ $race->id }}">{{ $race->nome }}</option>
-                    @endforeach
-                 </select>
-        </div>
+        
         <div class="col-md-4  ">
             <label class="labelForm" for="">Paginazione</label>
         @if (!empty($pilotList))
@@ -21,7 +13,6 @@
 
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-6">
             @if (!empty($pilotList))

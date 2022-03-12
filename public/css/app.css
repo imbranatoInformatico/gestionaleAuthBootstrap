@@ -22697,3 +22697,10 @@ main .form-submit-button:hover {
   background-color: #fff;
   box-shadow: 0 0 22px 0 rgba(0, 0, 0, 0.16);
 }
+.mainDash .dashCenter .contenitoreTable {
+  height: 650px;
+  overflow: auto;
+}
+.mainDash .dashCenter .contenitoreTable .tablePilotListPrenotati {
+  height: auto;
+}

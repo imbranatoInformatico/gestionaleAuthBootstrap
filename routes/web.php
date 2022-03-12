@@ -40,8 +40,11 @@ Route::get('/editPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotControll
 Route::put('/updatePilot/{id}', [App\Http\Controllers\PilotController::class, 'update'])->name('updatePilot');
 Route::get('/pilotReservation/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'reservation'])->name('pilotReservation');
 Route::post('/reservationPilotStore', [App\Http\Controllers\PilotController::class, 'reservationStore'])->name('reservationPilotStore');
-Route::get('/reservationPilotList/{codiceEvento}', [App\Http\Livewire\FiltroPilotiReservation::class, 'reservationPilotListIndex'])->name('reservationPilotList');
-Route::put('/pilotPresence/{id}', [App\Http\Controllers\PilotController::class, 'presence'])->name('pilotPresence');
+Route::get('/raceSelectReservation/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'raceSelectIndex'])->name('raceSelectReservation');
+Route::get('/reservationPilotList/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'reservationPilotListIndex'])->name('reservationPilotList');
+Route::put('/pilotCheck/{id}', [App\Http\Controllers\PilotController::class, 'check'])->name('pilotCheck');
+Route::delete('/deletPilotPresence/{codiceEvento}/{id}/{race_id}', [App\Http\Controllers\PilotController::class, 'destroyPresence'])->name('deletPilotPresence');
+
 
 
 //rotte per prenotazione pilota 

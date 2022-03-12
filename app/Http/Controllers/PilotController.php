@@ -131,10 +131,10 @@ class PilotController extends Controller
 
 
     }
-
-    public function presence(Request $request, $id)
+    //funzione per checkare la presenza del pilota durante la gara (check in)
+    public function check(Request $request, $id)
     {
-       // dd($request->all());
+       //dd($request->all());
         try {
        
         $pilot = Pilot::find($request->pilota_id);
@@ -145,14 +145,50 @@ class PilotController extends Controller
             'note' => $request->note
         ]);
 
-        return redirect()->route('reservationPilotList',$request->codiceEvento)->with('message','Pilota creato con successo');
+        return redirect()->route('reservationPilotList',array('codiceEvento' => $request->codiceEvento, 'gara' => $request->race_id))->with('message','Pilota creato con successo');
         }
         catch(\Exception $ex){
-        return redirect()->route('reservationPilotList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        return redirect()->route('reservationPilotList',array('codiceEvento' => $request->codiceEvento, 'gara' => $request->race_id))->with('message','Mi spiace qualcosa è andato storto'.$ex);
         }
 
   
 
+    }
+    //cancello la prenotazione del pilota dalla gara
+    public function destroyPresence($codiceEvento, $id, $race_id)
+    {
+        try {
+         DB::table('race_pilot')->where('pilot_id', $id)->delete();
+         return redirect()->route('reservationPilotList',array('codiceEvento' => $codiceEvento, 'gara' => $race_id))->with('message','Hai annulato la prenotazione');
+
+        }
+        catch(\Exception $ex){
+         return redirect()->route('reservationPilotList',array('codiceEvento' => $codiceEvento, 'gara' => $race_id))->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
+
+
+    }
+
+    public function raceSelectIndex($codiceEvento){
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $races = Race::where('idEvento',$codiceEvento)->get();
+        return view("raceSelectionReservation", compact('eventDash','races'));
+
+
+    }
+
+    public function reservationPilotListIndex(Request $request) {
+        
+        $eventDash = Event::where('codiceEvento',$request->codiceEvento)->first();
+        $race = $request->gara;
+        $pilotList = DB::table('race_pilot')
+                    ->join('pilots','race_pilot.pilot_id','=','pilots.id')
+                    ->join('categories','categories.id','=','pilots.idCategoria')
+                    ->where('race_id',$request->gara)
+                    ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','race_pilot.partecipazione')
+                    ->get();
+                    
+        return view("reservationPilotList", compact('eventDash','pilotList','race'));
     }
     /**
      * Show the form for editing the specified resource.

@@ -5274,6 +5274,8 @@ __webpack_require__(/*! ./components/TableCheck */ "./resources/js/components/Ta
 
 __webpack_require__(/*! ./components/RowTableCheck */ "./resources/js/components/RowTableCheck.js");
 
+__webpack_require__(/*! ./myJs/search */ "./resources/js/myJs/search.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5328,6 +5330,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -5340,6 +5354,66 @@ var RowTableCheck = function RowTableCheck(props) {
       nome = props.nome,
       cognome = props.cognome,
       nomeCategoria = props.nomeCategoria;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      pilotId = _useState2[0],
+      setPilotId = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      lista = _useState4[0],
+      setListaCheck = _useState4[1];
+
+  function updateClick(id) {
+    console.log(id);
+    var pilot_id = id;
+    var url = "http://127.0.0.1:8000/api/updateCheck/" + pilot_id;
+    console.log(url);
+    var requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, requestOptions).then(function (response) {
+      if (response.ok) {
+        console.log(response.json);
+        return response.json();
+      } else {
+        throw new Error('Problemi di conessione al endpoint api');
+      }
+    }).then(function (listaPilotiCheck) {
+      //console.log(listaPiloti)
+      setListaCheck(listaPilotiCheck);
+      window.location.reload(false);
+    });
+  }
+  /*  useEffect(() => {
+        
+        const url = "http://127.0.0.1:8000/api/updateCheck/" + `${pilotId}`;
+        console.log(url)
+         const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(url,requestOptions).then(response => {
+            if(response.ok){
+              console.log(response.json);
+              return response.json();
+            }
+            else{
+              throw new Error('Problemi di conessione al endpoint api');
+            }
+          })
+          .then((listaPilotiCheck) => {
+           //console.log(listaPiloti)
+           setListaCheck(listaPilotiCheck)
+      
+          })
+       }) */
+
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
       children: id
@@ -5349,6 +5423,15 @@ var RowTableCheck = function RowTableCheck(props) {
       children: cognome
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
       children: nomeCategoria
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        type: "submit",
+        className: "btn btn-outline-danger",
+        onClick: function onClick() {
+          return updateClick(id);
+        },
+        children: "ANNULLA CHECK"
+      })
     })]
   });
 };
@@ -5404,10 +5487,12 @@ function TableCheck() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       lista = _useState2[0],
-      setListaCheck = _useState2[1];
+      setListaCheck = _useState2[1]; //recupero il valore di race_id della gara
 
+
+  var race_id = document.getElementById("raceID").value;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var url = "http://127.0.0.1:8000/api/checkPilotList";
+    var url = "http://127.0.0.1:8000/api/checkPilotList/" + race_id;
     fetch(url).then(function (response) {
       if (response.ok) {
         console.log("sono dentro");
@@ -5435,14 +5520,16 @@ function TableCheck() {
           children: "COGNOME"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
           children: "CATEGORIA"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+          children: "ELIMINA"
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tbody", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
       className: "table-light",
-      children: [Object.keys(lista).map(function (pilota) {
+      children: Object.keys(lista).map(function (pilota) {
         console.log(lista[pilota]);
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RowTableCheck__WEBPACK_IMPORTED_MODULE_3__["default"], _objectSpread({}, lista[pilota]), lista[pilota].id);
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tr", {})]
+      })
     })]
   });
 }
@@ -5451,6 +5538,37 @@ function TableCheck() {
 
 if (document.getElementById('tableReact')) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(TableCheck, {}), document.getElementById('tableReact'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/myJs/search.js":
+/*!*************************************!*\
+  !*** ./resources/js/myJs/search.js ***!
+  \*************************************/
+/***/ (() => {
+
+function cerca() {
+  console.log("ciao");
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("ricerca");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tablePilotListPrenotati");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 }
 
 /***/ }),

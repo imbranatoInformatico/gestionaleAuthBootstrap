@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //endpoint per leggere i piloti checkati
-Route::get('/checkPilotList', [App\Http\Controllers\api\PilotCheckListController::class, 'index']);
+Route::get('/checkPilotList/{race_id}', [App\Http\Controllers\api\PilotCheckListController::class, 'index']);
+Route::put('/updateCheck/{pilot_id}', [App\Http\Controllers\api\PilotCheckListController::class, 'update']);
