@@ -5274,8 +5274,6 @@ __webpack_require__(/*! ./components/TableCheck */ "./resources/js/components/Ta
 
 __webpack_require__(/*! ./components/RowTableCheck */ "./resources/js/components/RowTableCheck.js");
 
-__webpack_require__(/*! ./myJs/search */ "./resources/js/myJs/search.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5538,37 +5536,6 @@ function TableCheck() {
 
 if (document.getElementById('tableReact')) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(TableCheck, {}), document.getElementById('tableReact'));
-}
-
-/***/ }),
-
-/***/ "./resources/js/myJs/search.js":
-/*!*************************************!*\
-  !*** ./resources/js/myJs/search.js ***!
-  \*************************************/
-/***/ (() => {
-
-function cerca() {
-  console.log("ciao");
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("ricerca");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tablePilotListPrenotati");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
 }
 
 /***/ }),

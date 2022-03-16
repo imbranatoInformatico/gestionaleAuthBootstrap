@@ -19,7 +19,7 @@ function cerca() {
     var input, filter, table, tr, td, thead,i, txtValue;
     input = document.getElementById("ricerca");
     filter = input.value.toUpperCase();
-    table = document.getElementById("tablePilotListPrenotati");
+    table = document.getElementById("tablePilotList");
     tr = table.getElementsByTagName("tr");
     thead = table.getElementsByTagName("thead");
 
@@ -69,7 +69,7 @@ function cerca() {
 <div class="row">
     <div class="col-md-6 contenitoreTable">
         @if (!empty($pilotList))
-        <table id="tablePilotListPrenotati" class="table table-responsive overflow-auto">
+        <table id="tablePilotList" class="table table-responsive overflow-auto">
             <thead class="">
               <tr class="text-center table-dark">
                   <td>ID</td>
@@ -84,10 +84,13 @@ function cerca() {
             <tbody class="table-light tbodyListPrenotati">
     
                 @foreach ($pilotList as $pilot)
-                
                 <tr id="rigaPrenotati"class="text-center">
                     <td>{{$pilot->id}}</td>
-                    <td></td>
+                    @if (!empty($pilot->img))
+                        <td><img class="img-fluid" src="{{Storage::url($pilot->img)}}" alt="" height="65px" width="59px"></td>
+                    @else 
+                       <td><i class="las la-user" style="font-size: 35px"></i></td>
+                    @endif
                     <td>{{$pilot->nome}}</td>
                     <td>{{$pilot->cognome}}</td>
                     <td>{{$pilot->nomeCategoria}}</td>

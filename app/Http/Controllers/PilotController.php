@@ -24,9 +24,13 @@ class PilotController extends Controller
         $pilotList = DB::table('pilots')
         ->join('teams','teams.id','=','pilots.idTeam')
         ->join('categories','categories.id','=','pilots.idCategoria')
-        ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','teams.nome as nomeTeam')
-        ->get();
+        ->join('event_pilot','event_pilot.pilot_id','=', 'pilots.id')
+        ->where('event_pilot.event_id',$codiceEvento)
+        ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','teams.nome as nomeTeam')
+        ->get(); 
+       // $pilotList = Event::find($codiceEvento)->pilots()->get();
 
+       // dd($pilotList);
         $categories = Category::where('idEvento',$codiceEvento)->get();
 
         return view('pilotList', compact('eventDash', 'pilotList','categories'));
@@ -56,17 +60,19 @@ class PilotController extends Controller
      */
     public function store(Request $request)
     {
-      // dd($request->all());
+      //dd($request->all());
       $request->validate([
             "idAdmin" => 'required',
             "nome" => 'required',
             "cognome" => 'required',
             "sesso" => 'required',
             "categoria" => 'required',
-            "team" => 'required',       
+            "team" => 'required',    
+            "img" => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'   
         ]);
     
         try {
+            $name = $request->file('img')->getClientOriginalName();
             Pilot::create([
                         "idAmministratore" => $request->idAdmin,
                         "nome" => $request->nome,
@@ -76,7 +82,7 @@ class PilotController extends Controller
                         "idTeam" => $request->team,
                         "mail" => $request->mail,
                         "telefono" => $request->telofono,
-                        "img" => $request->img,
+                        "img" => $request->file('img')->storeAs('images', $name),
                     ])->events()->attach($request->codiceEvento);
 
 
@@ -93,9 +99,13 @@ class PilotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($codiceEvento, $id)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+
+        $pilot = Pilot::find($id);
+
+        return view('showPilot', compact('pilot','eventDash'));
     }
 
     public function reservation($codiceEvento, $id)
@@ -103,8 +113,13 @@ class PilotController extends Controller
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
         $races = Race::where('idEvento',$codiceEvento)->get();
         $pilot = Pilot::where('id',$id)->get();
+        $race_prenotate =  DB::table('race_pilot')
+        ->where('pilot_id',$id)
+        ->select('race_pilot.race_id')
+        ->get(); 
+       // dd($race_prenotate);
 
-        return view('newReservation', compact('eventDash','races','pilot'));
+        return view('newReservation', compact('eventDash','races','pilot','race_prenotate'));
     }
 
     public function reservationStore(Request $request)
@@ -185,8 +200,9 @@ class PilotController extends Controller
                     ->join('pilots','race_pilot.pilot_id','=','pilots.id')
                     ->join('categories','categories.id','=','pilots.idCategoria')
                     ->where('race_id',$request->gara)
-                    ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria','race_pilot.partecipazione')
+                    ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','race_pilot.partecipazione')
                     ->get();
+                   // dd($pilotList);
                     
         return view("reservationPilotList", compact('eventDash','pilotList','race'));
     }
@@ -228,6 +244,7 @@ class PilotController extends Controller
        // dd($request->all());
         try {
             $pilot = Pilot::find($id);
+            $name = $request->file('img')->getClientOriginalName();
             $pilot->fill([
                         "idAmministratore" => $request->idAdmin,
                         "nome" => $request->nome,
@@ -237,11 +254,11 @@ class PilotController extends Controller
                         "idTeam" => $request->team,
                         "mail" => $request->mail,
                         "telefono" => $request->telofono,
-                        "img" => $request->img,
+                        "img" => $request->file('img')->storeAs('images', $name),
                         ])->save();
 
 
-            return redirect()->route('pilotList/',$request->codiceEvento)->with('message','Pilota creato con successo');
+            return redirect()->route('pilotList',$request->codiceEvento)->with('message','Pilota modificato con successo');
         }
         catch(\Exception $ex){
             return redirect()->route('pilotList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
@@ -272,6 +289,15 @@ class PilotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+             Pilot::find($id)->delete();
+
+             return redirect()->back()->with('message', 'Pilota cancellato con successo');   
+            }
+        catch(\Exception $ex){
+
+            return redirect()->back()->with('message', 'Mi spiace qualcosa è andato storto'.$ex);   
+
+        }
     }
 }

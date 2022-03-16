@@ -35,9 +35,12 @@ Route::get('/categoryList/{codiceEvento}', [App\Http\Controllers\CategoryControl
 //rotte per piloti
 Route::get('/newPilot/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'create'])->name('newPilot');
 Route::post('/newPilotStore', [App\Http\Controllers\PilotController::class, 'store'])->name('newPilotStore');
-Route::get('/pilotList/{codiceEvento}', [App\Http\Livewire\FiltroPiloti::class, 'pilotListIndex'])->name('pilotList');
+Route::get('/pilotList/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'index'])->name('pilotList');
 Route::get('/editPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'edit'])->name('editPilot');
 Route::put('/updatePilot/{id}', [App\Http\Controllers\PilotController::class, 'update'])->name('updatePilot');
+Route::delete('/deletPilot/{id}', [App\Http\Controllers\PilotController::class, 'destroy'])->name('deletPilot');
+Route::get('/showPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'show'])->name('showPilot');
+
 Route::get('/pilotReservation/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'reservation'])->name('pilotReservation');
 Route::post('/reservationPilotStore', [App\Http\Controllers\PilotController::class, 'reservationStore'])->name('reservationPilotStore');
 Route::get('/raceSelectReservation/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'raceSelectIndex'])->name('raceSelectReservation');

@@ -51,7 +51,11 @@
                         <label class="labelForm" for="">Scegli la gara </label>
                         <select class="form-select" name="idGara" id="">
                             @foreach ($races as $race)
-                                <option value="{{$race->id}}">{{$race->nome}}</option>
+                                @if ($race->id == $race_prenotate[0]->race_id)
+                                    <option value="{{$race->id}}" disabled>{{$race->nome}}</option>
+                                @else 
+                                    <option value="{{$race->id}}">{{$race->nome}}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

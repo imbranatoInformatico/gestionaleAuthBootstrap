@@ -20,7 +20,7 @@
     <div class="rowpt-2 ps-3 pe-3">
         <div class="col-md-12 ">
             <div class="boxFormInserimento ps-3 pe-3 py-3">
-                <form method="post" action="{{ url('updatePilot/'.$pilot[0]->id ) }}">
+                <form method="post" action="{{ url('updatePilot/'.$pilot[0]->id ) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">

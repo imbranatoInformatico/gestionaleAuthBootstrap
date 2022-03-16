@@ -21,7 +21,7 @@
     <div class="row pt-2 ps-3 pe-3">
         <div class="col-md-12 ">
             <div class="boxFormInserimento ps-3 pe-3 py-3">
-                <form method="post" action="{{ url('newPilotStore') }}">
+                <form method="post" action="{{ url('newPilotStore') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
