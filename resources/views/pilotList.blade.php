@@ -88,7 +88,7 @@
                 @endif
             <td>{{$pilot->nome}}</td>
             <td>{{$pilot->cognome}}</td>
-            <td>{{$pilot->nomeCategoria}}</td>
+            <td><div  style="background-color: {{$pilot->colore}}; text-transform:uppercase;">{{$pilot->nomeCategoria}}</div></td>
             <td>{{$pilot->nomeTeam}}</td>
             <td>
                 <a href="{{ route('pilotReservation',['codiceEvento'=>$eventDash->codiceEvento, 'id'=> $pilot->id])}}">

@@ -16,8 +16,9 @@ class CategoryController extends Controller
     public function index($codiceEvento)
     {
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $categories = Category::where('idEvento',$codiceEvento)->get();
 
-        return view('categoryList', compact('eventDash'));
+        return view('categoryList', compact('eventDash','categories'));
 
     }
 
@@ -40,10 +41,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         //verifichiamo i dati in arrivo con il validate
        $request->validate([
         'nome' => 'required | unique:categories',
-        'descrizione' => 'required', 
         'codiceEvento' => 'required', 
         ]);
 
@@ -51,7 +52,8 @@ class CategoryController extends Controller
             Category::create([
                 'nome' => $request->nome,
                 'descrizione' => $request->descrizione,
-                'idEvento' => $request->codiceEvento
+                'idEvento' => $request->codiceEvento,
+                'colore' => $request->colore
             ]); 
 
             return redirect()->route('newCategory',$request->codiceEvento)->with('message','Categoria creata con successo');
@@ -78,9 +80,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($codiceEvento,$id)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $category = Category::where('id',$id)->first();
+
+        return view('editCategory', compact('eventDash', 'category'));
     }
 
     /**
@@ -92,7 +97,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $category = Category::find($id);
+            $category->fill([
+                        "nome" => $request->nome,
+                        "descrizione" => $request->descrizione,
+                        "colore" => $request->colore        
+                        ])->save();
+
+
+            return redirect()->route('categoryList',$request->codiceEvento)->with('message','Pilota modificato con successo');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('categoryList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
     }
 
     /**
@@ -103,6 +121,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Category::find($id)->delete();
+
+            return redirect()->back()->with('message', 'Categoria cancellata con successo');   
+           }
+       catch(\Exception $ex){
+
+           return redirect()->back()->with('message', 'Mi spiace qualcosa è andato storto'.$ex);   
+
+       }
     }
 }

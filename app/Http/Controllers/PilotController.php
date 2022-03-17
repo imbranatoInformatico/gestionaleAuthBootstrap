@@ -26,7 +26,7 @@ class PilotController extends Controller
         ->join('categories','categories.id','=','pilots.idCategoria')
         ->join('event_pilot','event_pilot.pilot_id','=', 'pilots.id')
         ->where('event_pilot.event_id',$codiceEvento)
-        ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','teams.nome as nomeTeam')
+        ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','categories.colore as colore','teams.nome as nomeTeam')
         ->get(); 
        // $pilotList = Event::find($codiceEvento)->pilots()->get();
 

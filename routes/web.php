@@ -27,12 +27,25 @@ Route::get('/showDaFormCrea', [App\Http\Controllers\DashboardController::class, 
 Route::post('/dashboard', [App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard');
 Route::get('/impostazioni', [App\Http\Controllers\ImpostazioniController::class, 'index'])->name('impostazioniIndex');
 
-//rotte per le categorie
+//rotte per le categorie********************************************//
 Route::get('/newCategory/{codiceEvento}', [App\Http\Controllers\CategoryController::class, 'create'])->name('newCategory');
 Route::post('/newCategoryStore', [App\Http\Controllers\CategoryController::class, 'store'])->name('newCategoryStore');
 Route::get('/categoryList/{codiceEvento}', [App\Http\Controllers\CategoryController::class, 'index'])->name('categoryList');
+Route::get('/editCategory/{codiceEvento}/{id}', [App\Http\Controllers\CategoryController::class, 'edit'])->name('editCategory');
+Route::put('/updateCategory/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('updateCategory');
+Route::delete('/deleteCategory/{id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('deleteCategory');
+/*****************************************************************/
 
-//rotte per piloti
+//rotte per team ********************************************//
+Route::get('/newTeam/{codiceEvento}', [App\Http\Controllers\TeamController::class, 'create'])->name('newTeam');
+Route::post('/newTeamStore', [App\Http\Controllers\TeamController::class, 'store'])->name('newTeamStore');
+Route::get('/teamList/{codiceEvento}', [App\Http\Controllers\TeamController::class, 'index'])->name('teamList');
+Route::get('/editTeam/{codiceEvento}/{id}', [App\Http\Controllers\TeamController::class, 'edit'])->name('editTeam');
+Route::put('/updateTeam/{id}', [App\Http\Controllers\TeamController::class, 'update'])->name('updateTeam');
+Route::delete('/deleteTeam/{id}', [App\Http\Controllers\TeamController::class, 'destroy'])->name('deleteTeam');
+/*****************************************************************/
+
+//rotte per piloti********************************************//
 Route::get('/newPilot/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'create'])->name('newPilot');
 Route::post('/newPilotStore', [App\Http\Controllers\PilotController::class, 'store'])->name('newPilotStore');
 Route::get('/pilotList/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'index'])->name('pilotList');
@@ -40,29 +53,24 @@ Route::get('/editPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotControll
 Route::put('/updatePilot/{id}', [App\Http\Controllers\PilotController::class, 'update'])->name('updatePilot');
 Route::delete('/deletPilot/{id}', [App\Http\Controllers\PilotController::class, 'destroy'])->name('deletPilot');
 Route::get('/showPilot/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'show'])->name('showPilot');
-
 Route::get('/pilotReservation/{codiceEvento}/{id}', [App\Http\Controllers\PilotController::class, 'reservation'])->name('pilotReservation');
 Route::post('/reservationPilotStore', [App\Http\Controllers\PilotController::class, 'reservationStore'])->name('reservationPilotStore');
 Route::get('/raceSelectReservation/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'raceSelectIndex'])->name('raceSelectReservation');
 Route::get('/reservationPilotList/{codiceEvento}', [App\Http\Controllers\PilotController::class, 'reservationPilotListIndex'])->name('reservationPilotList');
 Route::put('/pilotCheck/{id}', [App\Http\Controllers\PilotController::class, 'check'])->name('pilotCheck');
 Route::delete('/deletPilotPresence/{codiceEvento}/{id}/{race_id}', [App\Http\Controllers\PilotController::class, 'destroyPresence'])->name('deletPilotPresence');
+/*****************************************************************/
 
 
-
-//rotte per prenotazione pilota 
-Route::get('/newReservation/{codiceEvento}', [App\Http\Controllers\ReservationController::class, 'create'])->name('newReservation');
-
-
-
-
-//rotte per team
-Route::get('/newTeam/{codiceEvento}', [App\Http\Controllers\TeamController::class, 'create'])->name('newTeam');
-Route::post('/newTeamStore', [App\Http\Controllers\TeamController::class, 'store'])->name('newTeamStore');
-
-//rotte per gara
+//rotte per le gare********************************************
 Route::get('/newRace/{codiceEvento}', [App\Http\Controllers\RaceController::class, 'create'])->name('newRace');
 Route::post('/newRaceStore', [App\Http\Controllers\RaceController::class, 'store'])->name('newRaceStore');
+Route::get('/raceList/{codiceEvento}', [App\Http\Controllers\RaceController::class, 'index'])->name('raceList');
+Route::get('/editRace/{codiceEvento}/{id}', [App\Http\Controllers\RaceController::class, 'edit'])->name('editRace');
+Route::put('/updateRace/{id}', [App\Http\Controllers\RaceController::class, 'update'])->name('updateRace');
+Route::delete('/deleteRace/{id}', [App\Http\Controllers\RaceController::class, 'destroy'])->name('deleteRace');
+
+/*****************************************************************/
 
 
 

@@ -22704,3 +22704,6 @@ main .form-submit-button:hover {
 .mainDash .dashCenter .contenitoreTable .tablePilotList {
   height: auto;
 }
+.mainDash .dashCenter .table td {
+  vertical-align: middle;
+}

@@ -36,7 +36,7 @@
         <div class="bloccoMenu collapse" id="collapseExample2">
             <ul>
                 <li class="item"><a href="{{ route('newTeam',['codiceEvento'=> $eventDash->codiceEvento])}}">Aggiungi team</a></li>
-                <li class="item">Lista team</li>
+                <li class="item"><a href="{{ route('teamList',['codiceEvento'=> $eventDash->codiceEvento])}}">Lista teams</a></li>
             </ul>
         </div>
     </div>
@@ -55,7 +55,7 @@
         <div class="bloccoMenu collapse" id="collapseExample3">
             <ul>
                 <li class="item"><a href="{{ route('newRace',['codiceEvento'=> $eventDash->codiceEvento])}}">Aggiungi gara</a></li>
-                <li class="item">Lista gare</li>
+                <li class="item"><a href="{{ route('raceList',['codiceEvento'=> $eventDash->codiceEvento])}}">Lista gare</a></li>
             </ul>
         </div>
     </div>

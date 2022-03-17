@@ -13,9 +13,12 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($codiceEvento)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $teams = Team::where('idEvento',$codiceEvento)->get();
+
+        return view('teamsList', compact('eventDash', 'teams'));
     }
 
     /**
@@ -45,9 +48,10 @@ class TeamController extends Controller
         ]);
     
         try {
+            $name = $request->file('img')->getClientOriginalName();
             Team::create([
                 'nome' => $request->nome, //lo converto per sicurezza in un int
-                'img' => $request->img,
+                'img' => $request->file('img')->storeAs('images', $name),
                 'idEvento' => $request->codiceEvento,
             ]); 
 
@@ -75,9 +79,12 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($codiceEvento,$id)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $team = Team::where('id',$id)->first();
+
+        return view('editTeam', compact('eventDash', 'team'));
     }
 
     /**
@@ -89,7 +96,20 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $team = Team::find($id);
+            $name = $request->file('img')->getClientOriginalName();
+            $team->fill([
+                        "nome" => $request->nome,
+                        "img" => $request->file('img')->storeAs('images', $name),
+                        ])->save();
+
+
+            return redirect()->route('teamList',$request->codiceEvento)->with('message','Team modificato con successo');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('teamList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
     }
 
     /**
@@ -100,6 +120,15 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Team::find($id)->delete();
+
+            return redirect()->back()->with('message', 'Team cancellato con successo');   
+           }
+       catch(\Exception $ex){
+
+           return redirect()->back()->with('message', 'Mi spiace qualcosa è andato storto'.$ex);   
+
+       }
     }
 }

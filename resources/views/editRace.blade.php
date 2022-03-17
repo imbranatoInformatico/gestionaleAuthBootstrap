@@ -21,24 +21,27 @@
                 {{ session('message') }}
             </div>
         @endif
-            <h3>Crea nuovo team </h3>
+            <h3>Modifica la gara {{$race->nome}} di {{$eventDash->nome}}</h3>
             
         </div>
     </div>
     <div class="rowpt-2 ps-3 pe-3">
         <div class="col-md-12 ">
             <div class="boxFormInserimento ps-3 pe-3 py-3">
-                <form method="post" action="{{url('newTeamStore')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url('updateRace/'.$race->id )}}">
                     @csrf
+                    @method('PUT')
                     <label class="labelForm" for="">Codice evento </label>
                     <input class="form-input-text " name="codiceEvento" type="number" placeholder="{{$eventDash->codiceEvento}}" value="{{$eventDash->codiceEvento}}" >
                     <label class="labelForm" for="">Nome </label>
-                    <input class="form-input-text " name="nome" type="nutextmber" placeholder="" value="" >
-                    <label class="labelForm" for="">logo </label>
-                    <div class="input-group pt-1 d-flex flex-column">
-                        <label class="labelForm" for="inputGroupFile01">Foto</label>
-                        <input type="file" name="img" class="" id="inputGroupFile01">
-                    </div>
+                    <input class="form-input-text " name="nome" type="text" placeholder="{{$race->nome}}" value="" >
+                    <label class="labelForm" for="">Circuito </label>
+                    <input class="form-input-text " name="circuito" type="text" placeholder="{{$race->circuito}}" value="" >
+                    <label class="labelForm" for="">Costo gara </label>
+                    <input class="form-input-text " name="costo" type="number" placeholder="{{$race->costoGara}}" value="" >
+                    <label class="labelForm" for="">Data </label>
+                    <input class="form-input-text " name="data" type="date" placeholder="{{$race->dataGara}}" value="" >
+                   
                     <input class="form-submit-button" type="submit" value="Salva">
                 </form>
             </div>

@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();            
             $table->string('nome');
             $table->string('descrizione')->nullable();
+            $table->string('colore')->nullable();
             $table->unsignedBigInteger('idEvento');
             $table->foreign('idEvento')->references('id')->on('events')->onCascade('delete');
             $table->timestamps();

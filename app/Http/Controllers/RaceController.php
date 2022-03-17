@@ -13,9 +13,12 @@ class RaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($codiceEvento)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $races = Race::where('idEvento',$codiceEvento)->get();
+
+        return view('raceList', compact('eventDash', 'races'));
     }
 
     /**
@@ -82,9 +85,12 @@ class RaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($codiceEvento,$id)
     {
-        //
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $race = Race::where('id',$id)->first();
+
+        return view('editRace', compact('eventDash', 'race'));
     }
 
     /**
@@ -96,7 +102,21 @@ class RaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $race = Race::find($id);
+            $race->fill([
+                        "nome" => $request->nome,
+                        "circuito" => $request->circuito,
+                        "costoGara" => $request->costo,
+                        "dataGara" => $request->data,
+                        ])->save();
+
+
+            return redirect()->route('raceList',$request->codiceEvento)->with('message','Race modificato con successo');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('raceList',$request->codiceEvento)->with('message','Mi spiace qualcosa è andato storto'.$ex);
+        }
     }
 
     /**
@@ -107,6 +127,15 @@ class RaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Race::find($id)->delete();
+
+            return redirect()->back()->with('message', 'Team cancellato con successo');   
+           }
+       catch(\Exception $ex){
+
+           return redirect()->back()->with('message', 'Mi spiace qualcosa è andato storto'.$ex);   
+
+       }
     }
 }
