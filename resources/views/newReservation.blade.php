@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label class="labelForm" for="">Codice pilota </label>
-                        <input class="form-input-text " name="codicePilota" type="number" placeholder="{{ $pilot[0]->id }}" value="{{ $pilot[0]->id }}" >
+                        <input class="form-input-text " name="codicePilota" type="number" placeholder="{{ $pilot->id }}" value="{{ $pilot->id }}" >
                     </div>
                     <div class="col-md-4">
                         <label class="labelForm" for="">IdAmministratore </label>
@@ -39,11 +39,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label class="labelForm" for="">Nome </label>
-                        <input class="form-input-text " name="nome" type="text" placeholder="{{$pilot[0]->nome}}" value="{{$pilot[0]->nome}}" >
+                        <input class="form-input-text " name="nome" type="text" placeholder="{{$pilot->nome}}" value="{{$pilot->nome}}" >
                     </div>
                     <div class="col-md-6">
                         <label class="labelForm" for="">Cognome </label>
-                        <input class="form-input-text " name="cognome" type="text" placeholder="{{$pilot[0]->cognome}}" value="{{$pilot[0]->cognome}}" >
+                        <input class="form-input-text " name="cognome" type="text" placeholder="{{$pilot->cognome}}" value="{{$pilot->cognome}}" >
                     </div>
                 </div>  
                 <div class="row">
@@ -51,11 +51,11 @@
                         <label class="labelForm" for="">Scegli la gara </label>
                         <select class="form-select" name="idGara" id="">
                             @foreach ($races as $race)
-                                @if ($race->id == $race_prenotate[0]->race_id)
+                                @if ($race->id == !empty($race_prenotate[0]->race_id))
                                     <option value="{{$race->id}}" disabled>{{$race->nome}}</option>
-                                @else 
+                                @else  
                                     <option value="{{$race->id}}">{{$race->nome}}</option>
-                                @endif
+                                @endif 
                             @endforeach
                         </select>
                     </div>

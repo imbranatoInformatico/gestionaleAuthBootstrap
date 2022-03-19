@@ -30,7 +30,7 @@ class PilotController extends Controller
         ->get(); 
        // $pilotList = Event::find($codiceEvento)->pilots()->get();
 
-       // dd($pilotList);
+        //dd($pilotList);
         $categories = Category::where('idEvento',$codiceEvento)->get();
 
         return view('pilotList', compact('eventDash', 'pilotList','categories'));
@@ -44,7 +44,7 @@ class PilotController extends Controller
     public function create($codiceEvento)
     {
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
-        $categories = Category::all();
+        $categories = Category::where('idEvento',$codiceEvento)->get();
         $teams = Team::all();
         //dd($categories);
 
@@ -112,7 +112,7 @@ class PilotController extends Controller
     {
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
         $races = Race::where('idEvento',$codiceEvento)->get();
-        $pilot = Pilot::where('id',$id)->get();
+        $pilot = Pilot::where('id',$id)->first();
         $race_prenotate =  DB::table('race_pilot')
         ->where('pilot_id',$id)
         ->select('race_pilot.race_id')

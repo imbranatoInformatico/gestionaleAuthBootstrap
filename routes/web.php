@@ -73,6 +73,19 @@ Route::delete('/deleteRace/{id}', [App\Http\Controllers\RaceController::class, '
 /*****************************************************************/
 
 
+//rotte per le classifiche********************************************
+Route::get('/newRanking/{codiceEvento}', [App\Http\Controllers\RankingController::class, 'create'])->name('newRanking');
+Route::post('/newRankingStore', [App\Http\Controllers\RankingController::class, 'store'])->name('newRankingStore');
+Route::get('/rankingList/{codiceEvento}', [App\Http\Controllers\RankingController::class, 'index'])->name('rankingList');
+Route::get('/editRanking/{codiceEvento}/{id}', [App\Http\Controllers\RankingController::class, 'edit'])->name('editRanking');
+Route::put('/updateRanking/{id}', [App\Http\Controllers\RankingController::class, 'update'])->name('updateRanking');
+Route::delete('/deleteRanking/{id}', [App\Http\Controllers\RankingController::class, 'destroy'])->name('deleteRanking');
+/*****************************************************************/
+
+//rotte per punteggi********************************************
+Route::get('/newScore/{codiceEvento}', [App\Http\Controllers\ScoreController::class, 'create'])->name('newScore');
+Route::post('/newRankingStore', [App\Http\Controllers\ScoreController::class, 'store'])->name('newScoreStore');
+/*****************************************************************/
 
 
 

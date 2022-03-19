@@ -81,6 +81,40 @@
         </div>
     </div>
     <div class="asideBlocco">
+        <div class="bloccoTitolo" data-bs-toggle="collapse" href="#collapseExample5"  aria-expanded="false" aria-controls="collapseExample4">                 
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="las la-pen"></span>
+                    <span class="title">Classifiche</span>
+                </div>
+                <div class="col-md-5">
+                    <span class="arrow las la-angle-down" ></span>
+                </div>
+            </div>
+        </div> 
+        <div class="bloccoMenu collapse" id="collapseExample5">
+            <ul>
+                <li class="item"><a href="{{ route('newRanking',['codiceEvento'=> $eventDash->codiceEvento])}}">Nuova classifica</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="{{ route('newScore',['codiceEvento'=> $eventDash->codiceEvento])}}">Nuovo punteggio</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="">Lista classifiche</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="">Registra risultato</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="">Classifiche piloti</a></li>
+            </ul>
+            <ul>
+                <li class="item"><a href="">Classifiche team</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="asideBlocco">
         <div class="bloccoTitolo">
             <span class="las la-cog"></span>
             <span class="title"><a href="{{ route('impostazioniIndex') }}">Impostazioni</a> </span>
