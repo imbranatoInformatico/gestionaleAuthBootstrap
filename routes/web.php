@@ -84,7 +84,7 @@ Route::delete('/deleteRanking/{id}', [App\Http\Controllers\RankingController::cl
 
 //rotte per punteggi********************************************
 Route::get('/newScore/{codiceEvento}', [App\Http\Controllers\ScoreController::class, 'create'])->name('newScore');
-Route::post('/newRankingStore', [App\Http\Controllers\ScoreController::class, 'store'])->name('newScoreStore');
+Route::post('/newScoreStore', [App\Http\Controllers\ScoreController::class, 'store'])->name('newScoreStore');
 /*****************************************************************/
 
 
