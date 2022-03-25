@@ -87,6 +87,13 @@ Route::get('/newScore/{codiceEvento}', [App\Http\Controllers\ScoreController::cl
 Route::post('/newScoreStore', [App\Http\Controllers\ScoreController::class, 'store'])->name('newScoreStore');
 /*****************************************************************/
 
+//rotte per risultati********************************************
+Route::get('/newResultFirstStep/{codiceEvento}', [App\Http\Controllers\ResultController::class, 'create'])->name('newResultFirstStep');
+Route::post('/newResultSecondStep', [App\Http\Controllers\ResultController::class, 'createSecondStep'])->name('newResultSecondStep');
+Route::post('/resultStore', [App\Http\Controllers\ResultController::class, 'store'])->name('resultStore');
+Route::get('/pilotsRankings/{codiceEvento}', [App\Http\Controllers\ResultController::class, 'index'])->name('pilotsRankings');
+
+/*****************************************************************/
 
 
 

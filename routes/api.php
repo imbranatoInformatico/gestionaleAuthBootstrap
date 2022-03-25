@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //endpoint per leggere i piloti checkati
 Route::get('/checkPilotList/{race_id}', [App\Http\Controllers\api\PilotCheckListController::class, 'index']);
 Route::put('/updateCheck/{pilot_id}', [App\Http\Controllers\api\PilotCheckListController::class, 'update']);
+
+//endpoint per leggere le classifiche
+Route::get('/pilotsRankings/{rank_id}', [App\Http\Controllers\api\RankingPilot::class, 'index']);

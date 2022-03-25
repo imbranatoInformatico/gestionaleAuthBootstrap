@@ -16,4 +16,8 @@ class Category extends Model
         return $this->hasMany(Pilot::class, 'idCategoria');
     }
 
+    public function ranking(){
+        return $this->belongsTo(Ranking::class, 'idCategory');
+    }
+
 }

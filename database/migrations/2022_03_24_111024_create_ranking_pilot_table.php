@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePilotRankingTable extends Migration
+class CreateRankingPilotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePilotRankingTable extends Migration
      */
     public function up()
     {
-        Schema::create('pilot_ranking', function (Blueprint $table) {
+        Schema::create('ranking_pilot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rank_id');
+            $table->unsignedBigInteger('ranking_id');
             $table->unsignedBigInteger('pilot_id');
-            $table->unsignedBigInteger('race_id');
+            $table->bigInteger('race_id');
             $table->bigInteger('posizioneQualifica')->nullable();
             $table->bigInteger('posizioneGara1')->nullable();
             $table->bigInteger('posizioneGara2')->nullable();
@@ -26,10 +26,10 @@ class CreatePilotRankingTable extends Migration
             $table->bigInteger('puntoPole')->nullable();
             $table->bigInteger('puntoPoleCategoria')->nullable();
             $table->bigInteger('puntoPresenza')->nullable();
-            $table->foreign('rank_id')->references('id')->on('rankings')->onDelete('cascade');
+            $table->foreign('ranking_id')->references('id')->on('rankings')->onDelete('cascade');
             $table->foreign('pilot_id')->references('id')->on('pilots')->onDelete('cascade');
-            $table->foreign('race_id')->references('id')->on('races')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
@@ -40,6 +40,6 @@ class CreatePilotRankingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pilot_ranking');
+        Schema::dropIfExists('ranking_pilot');
     }
 }

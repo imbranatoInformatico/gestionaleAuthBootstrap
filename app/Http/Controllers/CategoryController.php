@@ -44,7 +44,7 @@ class CategoryController extends Controller
         //dd($request->all());
         //verifichiamo i dati in arrivo con il validate
        $request->validate([
-        'nome' => 'required | unique:categories',
+        'nome' => 'required ',
         'codiceEvento' => 'required', 
         ]);
 

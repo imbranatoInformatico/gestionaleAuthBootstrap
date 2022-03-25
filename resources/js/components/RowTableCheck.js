@@ -40,33 +40,8 @@ const RowTableCheck = (props) => {
 
     }
     
-  /*  useEffect(() => {
-        
-        const url = "http://127.0.0.1:8000/api/updateCheck/" + `${pilotId}`;
-        console.log(url)
-
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-        };
-        fetch(url,requestOptions).then(response => {
-            if(response.ok){
-              console.log(response.json);
-              return response.json();
-            }
-            else{
-              throw new Error('Problemi di conessione al endpoint api');
-            }
-          })
-          .then((listaPilotiCheck) => {
-           //console.log(listaPiloti)
-           setListaCheck(listaPilotiCheck)
-      
-          })
-
-      }) */
-
-    return (
+    
+  return (
         <tr>
             <td>
                 {id}

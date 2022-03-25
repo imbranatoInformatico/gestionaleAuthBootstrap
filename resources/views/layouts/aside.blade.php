@@ -103,10 +103,10 @@
                 <li class="item"><a href="">Lista classifiche</a></li>
             </ul>
             <ul>
-                <li class="item"><a href="">Registra risultato</a></li>
+                <li class="item"><a href="{{ route('newResultFirstStep',['codiceEvento'=> $eventDash->codiceEvento])}}">Registra risultato</a></li>
             </ul>
             <ul>
-                <li class="item"><a href="">Classifiche piloti</a></li>
+                <li class="item"><a href="{{ route('pilotsRankings',['codiceEvento'=> $eventDash->codiceEvento])}}">Classifiche piloti</a></li>
             </ul>
             <ul>
                 <li class="item"><a href="">Classifiche team</a></li>

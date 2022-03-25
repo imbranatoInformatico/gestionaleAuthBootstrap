@@ -36,6 +36,9 @@ class Pilot extends Model
     {
         return $this->belongsToMany(Race::class,'race_pilot')->withPivot('partecipazione');
     }
-
+    public function rankings()
+    {
+        return $this->belongsToMany(Ranking::class,'ranking_pilot')->withPivot('race_id','posizioneQualifica','posizioneGara1','posizioneGara2','puntoGara1','puntoGara2','puntoPole','puntoPoleCategoria','puntoPresenza')->withTimestamps();
+    }
  
 }

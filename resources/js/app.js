@@ -14,4 +14,6 @@ require('./bootstrap');
 
 require('./components/TableCheck');
 require('./components/RowTableCheck');
+require('./components/TablePilotsRankings');
+require('./components/RowTablePilotsRankings');
 
