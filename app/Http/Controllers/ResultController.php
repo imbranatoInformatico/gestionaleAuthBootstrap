@@ -53,17 +53,26 @@ class ResultController extends Controller
 
         $rankingCategory = Ranking::where('id',$ranking)->get();
         $race = $request->gara;
-      //dd($rankingCategory);
-
-       $pilots= DB::table('race_pilot')
-                        ->join('pilots','race_pilot.pilot_id','=','pilots.id')
-                        ->join('categories','categories.id','=','pilots.idCategoria')
-                        ->where('partecipazione',1)
-                        ->where('race_id',$request->gara)
-                        ->where('categories.id',$rankingCategory[0]['idCategory'])
-                        ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
-                        ->get();
-      //dd($pilots);
+      //vecchia versione per singola classifica
+      /*$pilots= DB::table('race_pilot')
+                    ->join('pilots','race_pilot.pilot_id','=','pilots.id')
+                    ->join('categories','categories.id','=','pilots.idCategoria')
+                    ->where('partecipazione',1)
+                    ->where('race_id',$request->gara)
+                    ->where('categories.id',$rankingCategory[0]['idCategory'])
+                    ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
+                    ->get();*/
+        //NUOVA VERSIONE DI QUERY CHE STAMPA IL PILOTA IN DIVERSE CLASSIFICHE
+        $pilots = DB::table('categories_pilots')
+                    ->join('pilots','categories_pilots.pilot_id','=','pilots.id')
+                    ->join('categories','categories_pilots.category_id','=','categories.id')
+                    ->join('race_pilot','race_pilot.pilot_id','=','pilots.id')
+                    ->where('partecipazione',1)
+                    ->where('race_id',$request->gara)
+                    ->where('categories_pilots.category_id',$rankingCategory[0]['idCategory'])
+                    ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
+                    ->get(); 
+        //dd($rankingCategory[0]['idCategory']);
 
        $scores = Score::where('idRank',$ranking)->get();
       // dd($scores);
