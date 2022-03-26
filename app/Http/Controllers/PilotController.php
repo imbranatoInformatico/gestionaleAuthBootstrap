@@ -60,7 +60,7 @@ class PilotController extends Controller
      */
     public function store(Request $request)
     {
-      //dd($request->all());
+    //dd($request->all());
       $request->validate([
             "idAdmin" => 'required',
             "nome" => 'required',
@@ -72,18 +72,30 @@ class PilotController extends Controller
         ]);
     
         try {
-            $name = $request->file('img')->getClientOriginalName();
-            Pilot::create([
-                        "idAmministratore" => $request->idAdmin,
-                        "nome" => $request->nome,
-                        "cognome" => $request->cognome,
-                        "sesso" => $request->sesso,
-                        "idCategoria" => $request->categoria,
-                        "idTeam" => $request->team,
-                        "mail" => $request->mail,
-                        "telefono" => $request->telofono,
-                        "img" => $request->file('img')->storeAs('images', $name),
-                    ])->events()->attach($request->codiceEvento);
+     
+      /* HO MODIFICATO LA CREAZIONE DEL PILOTA ORA SALVA ANCHE IN DUE TABELE PIVOT 
+      (MANY TO MANY, categories_pilots e events_pilots) */
+
+                   $name = $request->file('img')->getClientOriginalName();
+
+                    $pilot = new Pilot();
+                    $pilot->idAmministratore = $request->idAdmin;
+                    $pilot->nome = $request->nome;
+                    $pilot->cognome = $request->nome;
+                    $pilot->sesso = $request->nome;
+                    $pilot->idCategoria = 1;
+                    $pilot->idTeam = $request->team;
+                    $pilot->mail = $request->mail;
+                    $pilot->telefono = $request->telofono;
+                    $pilot->img = $request->file('img')->storeAs('images', $name);
+                    
+                    $pilot->save();
+
+                    $pilot->categoriesMany()->attach($request->categoria);
+                    $pilot->events()->attach($request->codiceEvento);
+
+
+
 
 
             return redirect()->route('newPilot',$request->codiceEvento)->with('message','Pilota creato con successo');
