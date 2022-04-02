@@ -23,8 +23,10 @@ class RankingPilot extends Controller
                                     DB::raw('SUM(ranking_pilot.puntoGara1) as puntiGare1'),
                                     DB::raw('SUM(ranking_pilot.puntoGara2) as puntiGare2'),
                                     DB::raw('SUM(ranking_pilot.puntoPole) as puntiPole'),
-                                    DB::raw('SUM(ranking_pilot.puntoPresenza) as puntiPresenza'))
+                                    DB::raw('SUM(ranking_pilot.puntoPresenza) as puntiPresenza'),
+                                    DB::raw('SUM(ranking_pilot.puntoGara1 + ranking_pilot.puntoGara2 + ranking_pilot.puntoPresenza + ranking_pilot.puntoPole) as totale'))
                         ->groupBy('pilots.id')
+                        ->orderByDesc('totale')
                         ->get(); 
                         
         return $pilotsRanking;

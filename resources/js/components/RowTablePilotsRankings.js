@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 const RowTablePilotsRankings = (props) => {
-    const {nome,cognome,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza} = props;
+    const {nome,cognome,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza, totale} = props;
 
     const [pilotId, setPilotId] = useState("");
     const [lista, setListaCheck] = useState("");
@@ -37,7 +37,7 @@ const RowTablePilotsRankings = (props) => {
                 {parseInt(puntiPole)}
             </td>
             <td>
-                {parseInt(puntiGare1) + parseInt(puntiGare2) + parseInt(puntiPresenza) + parseInt(puntiPole)}
+                {parseInt(totale)}
             </td>
            
         </tr>
