@@ -34,7 +34,7 @@ function TableCheck() {
       }, []);
 
       return (
-        <table id="tablePilot" className="table table-responsive">
+        <table id="tablePilot" className="table">
         <thead className="table-dark">
           <tr className="">
               <td>ID</td>

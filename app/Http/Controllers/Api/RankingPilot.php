@@ -15,20 +15,19 @@ class RankingPilot extends Controller
      */
     public function index($rankId)
     {
-       //trovare la query per stampare i riusltati in base al rankId
-       $pilotsRanking = DB::table('ranking_pilot')
+      $pilotsRanking = DB::table('ranking_pilot')
                         ->join('pilots','ranking_pilot.pilot_id','=','pilots.id')
-                        ->join('categories','categories.id','=','pilots.idCategoria')
+                        ->join('rankings','rankings.id','=','ranking_pilot.ranking_id')
                         ->where('ranking_id',$rankId)
-                        ->select('pilots.nome','pilots.cognome','categories.nome as nomeCategoria',
-                                DB::raw('SUM(puntoGara1 + puntoGara2) as puntiGara'),
-                                DB::raw('SUM(puntoPresenza) as puntiPresenza'), 
-                                DB::raw('SUM(puntoPole) as puntiPole'),
-                                DB::raw('SUM(puntoGara1 + puntoGara2 + puntoPresenza + puntoPole) as totale'))
-                        ->get();
-
-       // dd($pilotsRanking);
-      return $pilotsRanking;
+                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica',
+                                    DB::raw('SUM(ranking_pilot.puntoGara1) as puntiGare1'),
+                                    DB::raw('SUM(ranking_pilot.puntoGara2) as puntiGare2'),
+                                    DB::raw('SUM(ranking_pilot.puntoPole) as puntiPole'),
+                                    DB::raw('SUM(ranking_pilot.puntoPresenza) as puntiPresenza'))
+                        ->groupBy('pilots.id')
+                        ->get(); 
+                        
+        return $pilotsRanking;
     }
 
     /**

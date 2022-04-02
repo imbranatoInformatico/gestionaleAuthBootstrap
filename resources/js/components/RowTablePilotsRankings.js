@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 const RowTablePilotsRankings = (props) => {
-    const {nome,cognome,nomeCategoria,puntiGara,puntiPresenza,puntiPole,totale} = props;
+    const {nome,cognome,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza} = props;
 
     const [pilotId, setPilotId] = useState("");
     const [lista, setListaCheck] = useState("");
@@ -24,19 +24,20 @@ const RowTablePilotsRankings = (props) => {
                 {cognome}
             </td>
             <td>
-                {nomeCategoria}
+                {/* risolvere il problema della doppia categoria in visualizzazione */}
+                {nomeClassifica}
             </td>
             <td>
-                {puntiGara}
+               {parseInt(puntiGare1) + parseInt(puntiGare2)}
             </td>
             <td>
-                {puntiPresenza}
+                {parseInt(puntiPresenza)}
             </td>
             <td>
-                {puntiPole}
+                {parseInt(puntiPole)}
             </td>
             <td>
-                {totale}
+                {parseInt(puntiGare1) + parseInt(puntiGare2) + parseInt(puntiPresenza) + parseInt(puntiPole)}
             </td>
            
         </tr>

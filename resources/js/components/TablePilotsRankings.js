@@ -41,7 +41,7 @@ function TablePilotsRankings(){
       
    
     return (
-        <table id="tablePilot" className="table table-responsive">
+        <table id="tablePilot" className="table">
         <thead className="table-dark">
           <tr className="">
               <td>POSIZIONE</td>
@@ -57,7 +57,7 @@ function TablePilotsRankings(){
         <tbody className="table-light">
         {
                 Object.keys(lista).map((pilotaRanking) =>{
-              //      console.log(lista[pilotaRanking]);    
+            console.log(lista[pilotaRanking]);    
 
                     return <RowTablePilotsRankings key={lista[pilotaRanking].id} {...lista[pilotaRanking]}></RowTablePilotsRankings>
 
