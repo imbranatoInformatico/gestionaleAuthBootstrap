@@ -44,13 +44,14 @@ class RankingPilot extends Controller
                         ->join('rankings','rankings.id','=','ranking_pilot.ranking_id')
                         ->where('ranking_id',$rankId)
                         ->where('race_id',$race_id)
-                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica', 'ranking_pilot.puntoGara1','ranking_pilot.puntoGara2','ranking_pilot.puntoPresenza','ranking_pilot.puntoPole','ranking_pilot.puntoPoleCategoria',
+                        ->select('pilots.nome','pilots.cognome','rankings.nome as nomeClassifica', 'ranking_pilot.puntoGara1','ranking_pilot.puntoGara2','ranking_pilot.puntoPresenza','ranking_pilot.puntoPole','ranking_pilot.puntoPoleCategoria',
+                                    DB::raw('row_number()OVER () as posizione'),
                                     DB::raw('SUM(ranking_pilot.puntoGara1 + ranking_pilot.puntoGara2 + ranking_pilot.puntoPresenza + ranking_pilot.puntoPole + ranking_pilot.puntoPoleCategoria) as totale'))
                         ->groupBy('pilots.id')
                         ->orderByDesc('totale')
                         ->get(); 
         
-        return response()->json($pilotsRanking);
+                        return response()->json($pilotsRanking);
     }
 
     /**

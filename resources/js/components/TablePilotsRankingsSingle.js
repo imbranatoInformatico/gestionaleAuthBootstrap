@@ -8,7 +8,8 @@ import RowTablePilotsRankingsSingleEvent from './RowTablePilotsRankingsSingleEve
 
 function TablePilotsRankingsSingle(){
   const [lista, setListaCheck] = useState("");
-  const [listaRace, setListaRace] = useState("");
+  const [contatore, setContatore] = useState(0);
+
 
     
     useEffect(()=>{
@@ -16,14 +17,14 @@ function TablePilotsRankingsSingle(){
             let rankId = document.querySelector('select').value;
             let raceId = document.getElementById('race_id').value;
 
-            console.log(raceId);
+            //console.log(raceId);
 
             const url = "http://127.0.0.1:8000/api/pilotsRankingsSingleEvento/" + rankId +"/"+ raceId;;
 
 
             fetch(url).then(response => {
                 if(response.ok){
-                console.log("sono dentro");
+               // console.log("sono dentro");
                   return response.json();
                 }
                 else{
@@ -54,9 +55,10 @@ function TablePilotsRankingsSingle(){
       
         
           Object.keys(lista).map((pilotaRanking) =>{
-          //  console.log(lista[pilotaRanking]);    
+          //  console.log(lista[pilotaRanking]);   
+          
 
-            return <RowTablePilotsRankingsSingleEvent key={lista[pilotaRanking].id} {...lista[pilotaRanking]}></RowTablePilotsRankingsSingleEvent>
+            return <RowTablePilotsRankingsSingleEvent key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankingsSingleEvent>
 
           })  
 

@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 const RowTablePilotsRankingsSingleEvent= (props) => {
-    const {nome,cognome,nomeClassifica,puntoGara1,puntoGara2, puntoPole, puntoPresenza,puntoPoleCategoria, totale} = props;
+    const {posizione,nome,cognome,nomeClassifica,puntoGara1,puntoGara2, puntoPole, puntoPresenza,puntoPoleCategoria, totale} = props;
 
-    const [pilotId, setPilotId] = useState("");
-    const [lista, setListaCheck] = useState("");
-
+    const [contatore, setContatore] = useState(0);
+    
   
+
     
     
   return (
         <tr>
-            <td>
-                
+            <td className="text-center">
+               {posizione}
             </td>
             <td>
                 {nome}
@@ -27,22 +27,22 @@ const RowTablePilotsRankingsSingleEvent= (props) => {
                 {/* risolvere il problema della doppia categoria in visualizzazione */}
                 {nomeClassifica}
             </td>
-            <td>
+            <td className="text-center">
                {parseInt(puntoGara1)}
-            </td>
-            <td>
+            </td >
+            <td className="text-center">
                {parseInt(puntoGara2)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(puntoPole)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(puntoPoleCategoria)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(puntoPresenza)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(totale)}
             </td>
            
