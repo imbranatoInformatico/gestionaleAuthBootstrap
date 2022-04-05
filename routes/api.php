@@ -24,6 +24,6 @@ Route::put('/updateCheck/{pilot_id}', [App\Http\Controllers\api\PilotCheckListCo
 
 //endpoint per leggere le classifiche
 Route::get('/pilotsRankings/{rank_id}', [App\Http\Controllers\api\RankingPilot::class, 'index']);
+Route::get('/pilotsRankingsSingleEvento/{rank_id}/{race_id}', [App\Http\Controllers\api\RankingPilot::class, 'eventoSingolo']);
 
-//endpoint per far inserire il nome delle gare nella instestazione della tabella
-//Route::get('/pilotsRankings/{rank_id}', [App\Http\Controllers\api\RankingPilot::class, 'nameRace']);
+

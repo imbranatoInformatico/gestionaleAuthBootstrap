@@ -81,8 +81,8 @@ class PilotController extends Controller
                     $pilot = new Pilot();
                     $pilot->idAmministratore = $request->idAdmin;
                     $pilot->nome = $request->nome;
-                    $pilot->cognome = $request->nome;
-                    $pilot->sesso = $request->nome;
+                    $pilot->cognome = $request->cognome;
+                    $pilot->sesso = $request->sesso;
                     $pilot->idCategoria = 1;
                     $pilot->idTeam = $request->team;
                     $pilot->mail = $request->mail;

@@ -16,4 +16,8 @@ require('./components/TableCheck');
 require('./components/RowTableCheck');
 require('./components/TablePilotsRankings');
 require('./components/RowTablePilotsRankings');
+require('./components/TablePilotsRankingsSingle');
+require('./components/RowTablePilotsRankingsSingleEvent');
+
+
 

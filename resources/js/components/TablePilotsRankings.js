@@ -5,8 +5,10 @@ import { useState, useEffect } from 'react';
 import RowTablePilotsRankings from './RowTablePilotsRankings';
 
 
+
 function TablePilotsRankings(){
   const [lista, setListaCheck] = useState("");
+  const [listaRace, setListaRace] = useState("");
 
     
     useEffect(()=>{
@@ -14,7 +16,7 @@ function TablePilotsRankings(){
             let rankId = document.querySelector('select').value;
            // console.log(rankId);
 
-            const url = "http://127.0.0.1:8000/api/pilotsRankings/" + rankId;
+            const url = "http://127.0.0.1:8000/api/pilotsRankings/" + rankId ;
 
             fetch(url).then(response => {
                 if(response.ok){
@@ -35,41 +37,32 @@ function TablePilotsRankings(){
         });
     })
 
+       
+         
+  
+      
+
  
 
   
       
    
     return (
-        <table id="tablePilot" className="table">
-        <thead className="table-dark">
-          <tr className="">
-              <td>POSIZIONE</td>
-              <td>NOME</td>
-              <td>COGNOME</td>
-              <td>CATEGORIA</td>
-              <td>PUNTI GARA</td>
-              <td>PUNTI PRESENZA</td>
-              <td>PUNTI POLE POSITION</td>
-              <td>TOTALE</td>
-          </tr>
-        </thead>
-        <tbody className="table-light">
-        {
-                Object.keys(lista).map((pilotaRanking) =>{
-            console.log(lista[pilotaRanking]);    
+      
+        
+          Object.keys(lista).map((pilotaRanking) =>{
+          //  console.log(lista[pilotaRanking]);    
 
-                    return <RowTablePilotsRankings key={lista[pilotaRanking].id} {...lista[pilotaRanking]}></RowTablePilotsRankings>
+            return <RowTablePilotsRankings key={lista[pilotaRanking].id} {...lista[pilotaRanking]}></RowTablePilotsRankings>
 
-                  })  
+          })  
 
                   
-            }
+            
         
         
             
-        </tbody>
-    </table> 
+     
       );
   
 }

@@ -92,6 +92,8 @@ Route::get('/newResultFirstStep/{codiceEvento}', [App\Http\Controllers\ResultCon
 Route::post('/newResultSecondStep', [App\Http\Controllers\ResultController::class, 'createSecondStep'])->name('newResultSecondStep');
 Route::post('/resultStore', [App\Http\Controllers\ResultController::class, 'store'])->name('resultStore');
 Route::get('/pilotsRankings/{codiceEvento}', [App\Http\Controllers\ResultController::class, 'index'])->name('pilotsRankings');
+Route::get('/pilotsRankingsSingoloEvento/{codiceEvento}', [App\Http\Controllers\ResultController::class, 'eventoSingolo'])->name('pilotsRankingsSingoloEvento');
+Route::post('/showRankingSingoloEvento/{codiceEvento}', [App\Http\Controllers\ResultController::class, 'showEventoSingolo'])->name('showRankingSingoloEvento');
 
 /*****************************************************************/
 

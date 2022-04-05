@@ -26,11 +26,32 @@ class ResultController extends Controller
     {
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
         $rankings = Ranking::where('idEvento',$codiceEvento)->get();
+        $races = Race::where('idEvento',$codiceEvento)->get();
 
 
-        return view('showPilotsRankings',compact('eventDash','rankings'));
+        return view('showPilotsRankings',compact('eventDash','rankings','races'));
     }
 
+    public function eventoSingolo($codiceEvento)
+    {
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        $races = Race::where('idEvento',$codiceEvento)->get();
+
+
+        return view('selectSingleEvent',compact('eventDash','races'));
+    }
+
+    public function showEventoSingolo($codiceEvento, Request $request)
+    {
+        $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
+        
+        $rankings = Ranking::where('idEvento',$codiceEvento)->get();
+
+        $race = $request->gara;
+
+
+        return view('showPilotsRankingsSingle',compact('eventDash','rankings','race'));
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -15,7 +15,7 @@
     </div>
 @endif
 <div class="row pt-2 mb-1 ps-3 pe-3">
-    <div class="col-md-8">
+    <div class="col-md-12">
         @if (session('message'))
         <div class="alert alert-success">
             {{ session('message') }}
@@ -35,7 +35,29 @@
             </div>
         </div>
         <div class="row pt-2  pe-3">
-            <div id="tableReactRankings" class="col-md-12"></div>
+            <div class="col-12">
+                <table id="tablePilot" class="table">
+                    <thead class="table-dark">
+                      <tr class="">
+                          <td>POSIZIONE</td>
+                          <td>NOME</td>
+                          <td>COGNOME</td>
+                          <td>RANK</td>
+                          {{-- @foreach ($races as $race)
+                              <td>{{$race->nome}}</td>
+                          @endforeach     --}}   
+                          <td>PUNTI GARA TOTALI</td>
+                          <td>PUNTI PRESENZA</td>
+                          <td>PUNTI POLE POSITION</td>
+                          <td>TOTALE</td>
+                      </tr>
+                    </thead>
+                    <tbody id="tableReactRankings" class="table-light ">
+    
+                    </tbody>
+                </table>
+            </div>
+           
         </div>
     </div>
 </div>

@@ -109,6 +109,9 @@
                 <li class="item"><a href="{{ route('pilotsRankings',['codiceEvento'=> $eventDash->codiceEvento])}}">Classifiche piloti</a></li>
             </ul>
             <ul>
+                <li class="item"><a href="{{ route('pilotsRankingsSingoloEvento',['codiceEvento'=> $eventDash->codiceEvento])}}">Classifica gara singola</a></li>
+            </ul>
+            <ul>
                 <li class="item"><a href="">Classifiche team</a></li>
             </ul>
         </div>
