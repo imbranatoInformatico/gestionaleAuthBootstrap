@@ -19,13 +19,13 @@ class CreatePilotsTable extends Migration
             $table->string('nome');
             $table->string('cognome');
             $table->char('sesso');
-            $table->unsignedBigInteger('idCategoria');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('idTeam');
             $table->string('mail')->nullable();
             $table->string('telefono')->nullable();
             $table->string('img')->nullable();
             $table->foreign('idAmministratore')->references('id')->on('users')->onCascade('delete');
-            $table->foreign('idCategoria')->references('id')->on('categories')->onCascade('delete');
+            $table->foreign('category_id')->references('id')->on('categories')->onCascade('delete');
             $table->foreign('idTeam')->references('id')->on('teams')->onCascade('delete');
             $table->timestamps();
         });

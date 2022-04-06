@@ -40,8 +40,7 @@
                     <thead class="table-dark">
                       <tr class="">
                           <td>POSIZIONE</td>
-                          <td>NOME</td>
-                          <td>COGNOME</td>
+                          <td>PILOTA</td>
                           <td>RANK</td>
                           {{-- @foreach ($races as $race)
                               <td>{{$race->nome}}</td>

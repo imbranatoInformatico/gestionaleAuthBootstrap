@@ -93,7 +93,7 @@ class ResultController extends Controller
                     ->where('categories_pilots.category_id',$rankingCategory[0]['idCategory'])
                     ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
                     ->get(); 
-        //dd($rankingCategory[0]['idCategory']);
+       // dd($pilots);
 
        $scores = Score::where('idRank',$ranking)->get();
       // dd($scores);

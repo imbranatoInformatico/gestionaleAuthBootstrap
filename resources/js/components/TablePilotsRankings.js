@@ -37,32 +37,17 @@ function TablePilotsRankings(){
         });
     })
 
-       
-         
   
-      
-
- 
-
-  
-      
-   
     return (
       
         
           Object.keys(lista).map((pilotaRanking) =>{
           //  console.log(lista[pilotaRanking]);    
 
-            return <RowTablePilotsRankings key={lista[pilotaRanking].id} {...lista[pilotaRanking]}></RowTablePilotsRankings>
+            return <RowTablePilotsRankings key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankings>
 
           })  
 
-                  
-            
-        
-        
-            
-     
       );
   
 }

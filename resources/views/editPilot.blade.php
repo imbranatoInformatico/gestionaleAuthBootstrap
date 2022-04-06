@@ -44,16 +44,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label class="labelForm" for="">Sesso</label>
                             <select class="form-select" name="sesso" id="">
                                 <option value="uomo">Uomo</option>
                                 <option value="donna">Donna</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label class="labelForm" for="">Categoria</label>
-                            <select class="form-select" name="categoria" id="">
+                            <select class="form-select" name="categoria[]" id="">
                                 @foreach ($categories as $category)
                                     @if($category->id == $pilot[0]->idCategoria)
                                     <option value="{{$pilot[0]->idCategoria}}" selected>{{$pilot[0]->nomeCategoria}}</option>
@@ -63,7 +63,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label class="labelForm" for="">Classifica Assoluta</label>
+                            <select class="form-select" name="categoria[]" id="">
+                                <option value="0" selected>Nessun seconda categoria</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->nome }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <label class="labelForm" for="">Team</label>
                             <select class="form-select" name="team" id="">
                                 @foreach ($teams as $team)
@@ -79,15 +88,15 @@
                     </div>                
                     <label class="labelForm" for="">Mail </label>
                     @if(!empty($pilot[0]->mail))
-                    <input class="form-input-text " name="mail" type="nutextmber"  placeholder="{{$pilot[0]->mail}}" value="" >
+                    <input class="form-input-text " name="mail" type="nutextmber"  placeholder="{{$pilot[0]->mail}}" value="{{$pilot[0]->mail}}" >
                     @else 
                     <input class="form-input-text " name="mail" type="nutextmber"  placeholder="" value="" >
                     @endif
                     <label class="labelForm" for="">Telfono </label>
                     @if(!empty($pilot[0]->telefono))
-                    <input class="form-input-text " name="telefono" type="nutextmber" placeholder="{{$pilot[0]->telefono}}" value="" >
+                    <input class="form-input-text " name="telefono" type="nutextmber" placeholder="{{$pilot[0]->telefono}}" value="{{$pilot[0]->telefono}}" >
                     @else 
-                    <input class="form-input-text " name="mail" type="nutextmber"  placeholder="" value="" >
+                    <input class="form-input-text " name="telefono" type="nutextmber"  placeholder="" value="" >
                     @endif
                     <div class="input-group pt-1 d-flex flex-column">
                         <label class="labelForm" for="inputGroupFile01">Foto</label>

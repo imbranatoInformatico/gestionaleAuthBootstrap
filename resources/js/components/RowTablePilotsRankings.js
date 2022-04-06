@@ -4,39 +4,30 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 const RowTablePilotsRankings = (props) => {
-    const {nome,cognome,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza, totale} = props;
+    const {posizione,nome,cognome,img,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza, totale} = props;
 
-    const [pilotId, setPilotId] = useState("");
-    const [lista, setListaCheck] = useState("");
-
-  
-    
-    
   return (
         <tr>
-            <td>
-                
+            <td className="text-center">
+                {posizione}
             </td>
             <td>
-                {nome}
-            </td>
-            <td>
-                {cognome}
+                {nome} {cognome}
             </td>
             <td>
                 {/* risolvere il problema della doppia categoria in visualizzazione */}
                 {nomeClassifica}
             </td>
-            <td>
+            <td className="text-center">
                {parseInt(puntiGare1) + parseInt(puntiGare2)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(puntiPresenza)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(puntiPole)}
             </td>
-            <td>
+            <td className="text-center">
                 {parseInt(totale)}
             </td>
            

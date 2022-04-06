@@ -66,7 +66,7 @@
     <thead class="table-dark">
       <tr class="text-center">
           <td>ID</td>
-          <td>AVATAR</td>
+        <td>AVATAR</td>
           <td>NOME</td>
           <td>COGNOME</td>
           <td>CATEGORIA</td>
@@ -86,7 +86,7 @@
                 @else
                     <td><i class="las la-user" style="font-size: 35px"></i></td>
                 @endif
-            <td>{{$pilot->nome}}</td>
+            <td>{{$pilot->nomePilota}}</td>
             <td>{{$pilot->cognome}}</td>
             <td><div  style="background-color: {{$pilot->colore}}; text-transform:uppercase;">{{$pilot->nomeCategoria}}</div></td>
             <td>{{$pilot->nomeTeam}}</td>

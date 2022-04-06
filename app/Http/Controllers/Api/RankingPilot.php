@@ -23,7 +23,8 @@ class RankingPilot extends Controller
                         ->join('pilots','ranking_pilot.pilot_id','=','pilots.id')
                         ->join('rankings','rankings.id','=','ranking_pilot.ranking_id')
                         ->where('ranking_id',$rankId)
-                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica',
+                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica', 'pilots.img',
+                                    DB::raw('row_number()OVER () as posizione'),
                                     DB::raw('SUM(ranking_pilot.puntoGara1) as puntiGare1'),
                                     DB::raw('SUM(ranking_pilot.puntoGara2) as puntiGare2'),
                                     DB::raw('SUM(ranking_pilot.puntoPole) as puntiPole'),

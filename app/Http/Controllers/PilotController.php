@@ -23,12 +23,22 @@ class PilotController extends Controller
         $eventDash = Event::where('codiceEvento',$codiceEvento)->first();
         $pilotList = DB::table('pilots')
         ->join('teams','teams.id','=','pilots.idTeam')
-        ->join('categories','categories.id','=','pilots.idCategoria')
+        ->join('categories','categories.id','=','pilots.category_id')
         ->join('event_pilot','event_pilot.pilot_id','=', 'pilots.id')
         ->where('event_pilot.event_id',$codiceEvento)
-        ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','categories.colore as colore','teams.nome as nomeTeam')
-        ->get(); 
-       // $pilotList = Event::find($codiceEvento)->pilots()->get();
+        ->select('pilots.id','pilots.nome as nomePilota','pilots.cognome','pilots.img','categories.nome as nomeCategoria','categories.colore as colore', 'teams.nome as nomeTeam') 
+        ->get();   
+
+      /*    $pilotList = DB::table('categories_pilots')
+                    ->select('pilots.id' ,'categories_pilots.category_id','pilots.nome as nomePilota', 'pilots.cognome','pilots.img', 'categories.nome as nomeCategoria','categories.colore as colore', 'teams.nome as nomeTeam')
+                    ->join('pilots','pilots.id','=','categories_pilots.pilot_id')
+                    ->join('categories','categories.id','=','categories_pilots.category_id')
+                    ->join('teams','teams.id','=','pilots.idTeam')
+                    ->join('event_pilot','event_pilot.pilot_id','=','categories_pilots.pilot_id')
+                    ->where('event_pilot.event_id','=',$codiceEvento)
+                    ->get(); */
+       
+       // $pilotList = Event::find($codiceEvento)->categoriesMany()->get();
 
         //dd($pilotList);
         $categories = Category::where('idEvento',$codiceEvento)->get();
@@ -60,7 +70,7 @@ class PilotController extends Controller
      */
     public function store(Request $request)
     {
-    //dd($request->all());
+       //dd($request->categoria[0]);
       $request->validate([
             "idAdmin" => 'required',
             "nome" => 'required',
@@ -83,7 +93,7 @@ class PilotController extends Controller
                     $pilot->nome = $request->nome;
                     $pilot->cognome = $request->cognome;
                     $pilot->sesso = $request->sesso;
-                    $pilot->idCategoria = 1;
+                    $pilot->category_id = $request->categoria[0]; //assegno qui la prima categoria della due
                     $pilot->idTeam = $request->team;
                     $pilot->mail = $request->mail;
                     $pilot->telefono = $request->telofono;
@@ -210,7 +220,7 @@ class PilotController extends Controller
         $race = $request->gara;
         $pilotList = DB::table('race_pilot')
                     ->join('pilots','race_pilot.pilot_id','=','pilots.id')
-                    ->join('categories','categories.id','=','pilots.idCategoria')
+                    ->join('categories','categories.id','=','pilots.category_id')
                     ->where('race_id',$request->gara)
                     ->select('pilots.id','pilots.nome','pilots.cognome','pilots.img','categories.nome as nomeCategoria','race_pilot.partecipazione')
                     ->get();
@@ -230,17 +240,21 @@ class PilotController extends Controller
 
         $pilot = DB::table('pilots')
         ->join('teams','teams.id','=','pilots.idTeam')
-        ->join('categories','categories.id','=','pilots.idCategoria')
+        ->join('categories','categories.id','=','pilots.category_id')
         ->select('pilots.id','pilots.nome','pilots.cognome','pilots.mail','pilots.telefono','categories.id as idCategoria','categories.nome as nomeCategoria','teams.id as idTeam','teams.nome as nomeTeam')
         ->where('pilots.id', '=', $id)
         ->get();
 
         //dd($pilot);
 
+        //recupero prima categoria o formula (di solito classifica assoluta)
         $categories = Category::where('idEvento',$codiceEvento)->get();
-        //dd($categories);
+        //recupero seconda categoria o formula (di solito classifica assoluta)
+        $categories2 = Pilot::find($id)->categoriesMany()->get();
+        //dd($categories2);
+
         $teams = Team::where('idEvento',$codiceEvento)->get();
-        return view('editPilot', compact('eventDash','pilot','categories','teams'));
+        return view('editPilot', compact('eventDash','pilot','categories','teams','categories2'));
     }
 
     /**
@@ -253,21 +267,25 @@ class PilotController extends Controller
     public function update(Request $request, $id)
     {
 
-       // dd($request->all());
+    //  dd($request->categoria[1]);
         try {
             $pilot = Pilot::find($id);
             $name = $request->file('img')->getClientOriginalName();
-            $pilot->fill([
-                        "idAmministratore" => $request->idAdmin,
-                        "nome" => $request->nome,
-                        "cognome" => $request->cognome,
-                        "sesso" => $request->sesso,
-                        "idCategoria" => $request->categoria,
-                        "idTeam" => $request->team,
-                        "mail" => $request->mail,
-                        "telefono" => $request->telofono,
-                        "img" => $request->file('img')->storeAs('images', $name),
-                        ])->save();
+              
+                    $pilot->idAmministratore = $request->idAdmin;
+                    $pilot->nome = $request->nome;
+                    $pilot->cognome = $request->cognome;
+                    $pilot->sesso = $request->sesso;
+                    $pilot->category_id = $request->categoria[0]; //assegno qui la prima categoria della due
+                    $pilot->idTeam = $request->team;
+                    $pilot->mail = $request->mail;
+                    $pilot->telefono = $request->telefono;
+                    $pilot->img = $request->file('img')->storeAs('images', $name);
+                    
+                    $pilot->save();
+     
+                    $pilot->categoriesMany()->sync($request->categoria);
+
 
 
             return redirect()->route('pilotList',$request->codiceEvento)->with('message','Pilota modificato con successo');

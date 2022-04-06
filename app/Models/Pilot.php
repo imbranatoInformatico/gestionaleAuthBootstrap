@@ -13,7 +13,7 @@ class Pilot extends Model
     protected $table = 'pilots';
 
 
-    protected $fillable = ['idAmministratore','nome','cognome','sesso','idCategoria','idTeam','mail','telefono','img'];
+    protected $fillable = ['idAmministratore','nome','cognome','sesso','category_id','idTeam','mail','telefono','img'];
 
     public function users()
     {

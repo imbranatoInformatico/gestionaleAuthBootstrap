@@ -19,7 +19,7 @@ class PilotCheckListController extends Controller
         
         $listCheck = DB::table('race_pilot')
                         ->join('pilots','race_pilot.pilot_id','=','pilots.id')
-                        ->join('categories','categories.id','=','pilots.idCategoria')
+                        ->join('categories','categories.id','=','pilots.category_id')
                         ->where('partecipazione',1)
                         ->where('race_id',$request->race_id)
                         ->select('pilots.id','pilots.nome','pilots.cognome','categories.nome as nomeCategoria')
