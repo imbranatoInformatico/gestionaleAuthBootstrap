@@ -78,15 +78,14 @@ class PilotController extends Controller
             "sesso" => 'required',
             "categoria" => 'required',
             "team" => 'required',    
-            "img" => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'   
+           // "img" => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048'   
         ]);
     
         try {
      
       /* HO MODIFICATO LA CREAZIONE DEL PILOTA ORA SALVA ANCHE IN DUE TABELE PIVOT 
       (MANY TO MANY, categories_pilots e events_pilots) */
-
-                   $name = $request->file('img')->getClientOriginalName();
+                   
 
                     $pilot = new Pilot();
                     $pilot->idAmministratore = $request->idAdmin;
@@ -97,7 +96,10 @@ class PilotController extends Controller
                     $pilot->idTeam = $request->team;
                     $pilot->mail = $request->mail;
                     $pilot->telefono = $request->telofono;
-                    $pilot->img = $request->file('img')->storeAs('images', $name);
+                    if($request->img != null) {
+                        $name = $request->file('img')->getClientOriginalName();
+                        $pilot->img = $request->file('img')->storeAs('images', $name);
+                    }
                     
                     $pilot->save();
 

@@ -9,6 +9,7 @@ import RowTablePilotsRankings from './RowTablePilotsRankings';
 function TablePilotsRankings(){
   const [lista, setListaCheck] = useState("");
   const [listaRace, setListaRace] = useState("");
+  const [row, setRow] = useState("");
 
     
     useEffect(()=>{
@@ -28,23 +29,24 @@ function TablePilotsRankings(){
                 }
               })
               .then((listaPilotiRanking) => {
-            //   console.log(listaPilotiRanking)
                 setListaCheck(listaPilotiRanking)
+                setRow(listaPilotiRanking.length)
               
               })
            
     
         });
     })
+    
 
   
     return (
-      
-        
-          Object.keys(lista).map((pilotaRanking) =>{
-          //  console.log(lista[pilotaRanking]);    
 
-            return <RowTablePilotsRankings key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankings>
+          Object.keys(lista,row).map((pilotaRanking, rowRanking) =>{
+           // for (let index = 1; index <= rowRanking; index++) {
+              return <RowTablePilotsRankings  posizioneD={rowRanking + 1} key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankings>
+            
+            //}
 
           })  
 

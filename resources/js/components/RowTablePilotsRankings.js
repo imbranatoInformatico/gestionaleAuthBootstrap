@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 const RowTablePilotsRankings = (props) => {
-    const {posizione,nome,cognome,img,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza, totale} = props;
+    const {posizioneD,nome,cognome,img,nomeClassifica,puntiGare1,puntiGare2, puntiPole, puntiPresenza, totale} = props;
+    
+
 
   return (
         <tr>
             <td className="text-center">
-                {posizione}
+                {posizioneD}
             </td>
             <td>
                 {nome} {cognome}

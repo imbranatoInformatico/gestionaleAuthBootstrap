@@ -62,7 +62,6 @@
                         <div class="col-md-3">
                             <label class="labelForm" for="">Classifica Assoluta</label>
                             <select class="form-select" name="categoria[]" id="">
-                                <option value="0" selected>Nessun seconda categoria</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->nome }}</option>
                                 @endforeach
