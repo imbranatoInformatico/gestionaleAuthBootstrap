@@ -39,22 +39,20 @@
             <div class="col-12">
                 <table id="tablePilot" class="table">
                     <thead class="table-dark">
-                      <tr class="">
-                          <td>POSIZIONE</td>
-                          <td>NOME</td>
-                          <td>COGNOME</td>
-                          <td>RANK</td>
-                          {{-- @foreach ($races as $race)
-                              <td>{{$race->nome}}</td>
-                          @endforeach     --}}   
-                          <td>PUNTI GARA 1</td>
-                          <td>PUNTI GARA 2</td>
-                          <td>PUNTI POLE POSITION</td>
-                          <td>PUNTI POLE CAT.</td>
-                          <td>PUNTI PRESENZA</td>
-                          <td>TOTALE</td>
-                      </tr>
-                    </thead>
+                        <tr class="">
+                            <td class="text-center">POSIZIONE</td>
+                            <td class="text-center">PILOTA</td>
+                            <td class="text-center">RANK</td>
+                            {{-- @foreach ($races as $race)
+                                <td>{{$race->nome}}</td>
+                            @endforeach     --}}   
+                            <td class="text-center">PUNTI GARA TOTALI</td>
+                            <td class="text-center">PUNTO PRESENZA</td>
+                            <td class="text-center">PUNTO POLE POSITION</td>
+                            <td class="text-center">PUNTO POLE CATEGORIA</td>
+                            <td class="text-center">TOTALE</td>
+                        </tr>
+                      </thead>
                     <tbody id="tableReactRankingsSingle" class="table-light ">
     
                     </tbody>

@@ -12,7 +12,7 @@ class Ranking extends Model
     protected $table = 'rankings';
 
 
-    protected $fillable = ['nome','descrizione','idCategory','idEvento'];
+    protected $fillable = ['nome','descrizione','colore','idCategory','idEvento'];
 
     public function category(){
         return $this->hasOne(Category::class);

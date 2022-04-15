@@ -42,6 +42,13 @@
                                     <option value="{{ $category->id }}">{{ $category->nome }}</option>
                                 @endforeach
                             </select>
+                    <label class="labelForm" for="">Colore Ranking</label>
+                        <select class="form-select" name="colore" id="">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->colore }}">{{ $category->nome }}</option>
+                            @endforeach
+                        </select>
+                    
                    
                     <input class="form-submit-button" type="submit" value="Salva">
                 </form>

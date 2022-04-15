@@ -23,8 +23,7 @@ class RankingPilot extends Controller
                         ->join('pilots','ranking_pilot.pilot_id','=','pilots.id')
                         ->join('rankings','rankings.id','=','ranking_pilot.ranking_id')
                         ->where('ranking_id',$rankId)
-                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica', 'pilots.img',
-                                    DB::raw('row_number()OVER () as posizione'),
+                        ->select('pilots.nome','pilots.cognome', 'rankings.nome as nomeClassifica', 'pilots.img', 'rankings.colore as coloreRank',
                                     DB::raw('SUM(ranking_pilot.puntoGara1) as puntiGare1'),
                                     DB::raw('SUM(ranking_pilot.puntoGara2) as puntiGare2'),
                                     DB::raw('SUM(ranking_pilot.puntoPole) as puntiPole'),
@@ -45,8 +44,8 @@ class RankingPilot extends Controller
                         ->join('rankings','rankings.id','=','ranking_pilot.ranking_id')
                         ->where('ranking_id',$rankId)
                         ->where('race_id',$race_id)
-                        ->select('pilots.nome','pilots.cognome','rankings.nome as nomeClassifica', 'ranking_pilot.puntoGara1','ranking_pilot.puntoGara2','ranking_pilot.puntoPresenza','ranking_pilot.puntoPole','ranking_pilot.puntoPoleCategoria',
-                                    DB::raw('row_number()OVER () as posizione'),
+                        ->select('pilots.nome','pilots.cognome','rankings.nome as nomeClassifica', 'rankings.colore as coloreRank','ranking_pilot.puntoGara1','ranking_pilot.puntoGara2','ranking_pilot.puntoPresenza','ranking_pilot.puntoPole','ranking_pilot.puntoPoleCategoria',
+                                    DB::raw('SUM(ranking_pilot.puntoGara1 + ranking_pilot.puntoGara2) as puntiGaraGiornata'),
                                     DB::raw('SUM(ranking_pilot.puntoGara1 + ranking_pilot.puntoGara2 + ranking_pilot.puntoPresenza + ranking_pilot.puntoPole + ranking_pilot.puntoPoleCategoria) as totale'))
                         ->groupBy('pilots.id')
                         ->orderByDesc('totale')
@@ -54,6 +53,8 @@ class RankingPilot extends Controller
         
                         return response()->json($pilotsRanking);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

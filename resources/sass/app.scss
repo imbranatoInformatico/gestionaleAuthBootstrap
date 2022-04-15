@@ -84,13 +84,13 @@ main {
 
 .mainDash {
     background-color: #EDE7E7;
-    height: 100vh;
+    height: auto;
     justify-content: flex-start;
     align-items: flex-start;
     aside {
         width: 200px;
         background-color: #3b3b3b;
-        height: 100%;
+        min-height: 100vh;
         .asideBlocco {
             width: 100%;
             height: auto;
@@ -198,6 +198,9 @@ main {
         .table td {
             vertical-align: middle;
         }
+      /*  .table .posizione {
+            background: linear-gradient(120deg, #fa0202 0%, transparent 26%, transparent 26%);
+        }*/
     }
     
 }

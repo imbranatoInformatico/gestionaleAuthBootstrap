@@ -272,7 +272,6 @@ class PilotController extends Controller
     //  dd($request->categoria[1]);
         try {
             $pilot = Pilot::find($id);
-            $name = $request->file('img')->getClientOriginalName();
               
                     $pilot->idAmministratore = $request->idAdmin;
                     $pilot->nome = $request->nome;
@@ -282,7 +281,10 @@ class PilotController extends Controller
                     $pilot->idTeam = $request->team;
                     $pilot->mail = $request->mail;
                     $pilot->telefono = $request->telefono;
-                    $pilot->img = $request->file('img')->storeAs('images', $name);
+                    if($request->img != null) {
+                        $name = $request->file('img')->getClientOriginalName();
+                        $pilot->img = $request->file('img')->storeAs('images', $name);
+                    }
                     
                     $pilot->save();
      

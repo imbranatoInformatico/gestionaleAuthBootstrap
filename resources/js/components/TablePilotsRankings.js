@@ -16,7 +16,6 @@ function TablePilotsRankings(){
         document.querySelector('select').addEventListener('change', function(){
             let rankId = document.querySelector('select').value;
            // console.log(rankId);
-
             const url = "http://127.0.0.1:8000/api/pilotsRankings/" + rankId ;
 
             fetch(url).then(response => {

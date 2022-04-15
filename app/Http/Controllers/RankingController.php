@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ranking;
 use App\Models\Category;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 
 class RankingController extends Controller
@@ -42,16 +43,18 @@ class RankingController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             "nome" => 'required',
             "categoria" => 'required',
-            "codiceEvento" => 'required' 
+            "codiceEvento" => 'required', 
         ]);
     
         try {
             Ranking::create([
                         "nome" => $request->nome,
                         "descrizione" => $request->descrizione,
+                        "colore" => $request->colore,
                         "idCategory" => $request->categoria,
                         "idEvento" => $request->codiceEvento
                     ])->save();
@@ -64,6 +67,7 @@ class RankingController extends Controller
         }
     }
 
+      
     /**
      * Display the specified resource.
      *

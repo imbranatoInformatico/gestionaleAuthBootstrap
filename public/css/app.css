@@ -33850,14 +33850,14 @@ main .form-submit-button:hover {
 
 .mainDash {
   background-color: #EDE7E7;
-  height: 100vh;
+  height: auto;
   justify-content: flex-start;
   align-items: flex-start;
 }
 .mainDash aside {
   width: 200px;
   background-color: #3b3b3b;
-  height: 100%;
+  min-height: 100vh;
 }
 .mainDash aside .asideBlocco {
   width: 100%;
@@ -33919,6 +33919,9 @@ main .form-submit-button:hover {
 .mainDash .dashCenter {
   height: 100%;
   width: 100%;
+  /*  .table .posizione {
+        background: linear-gradient(120deg, #fa0202 0%, transparent 26%, transparent 26%);
+    }*/
 }
 .mainDash .dashCenter .boxNomeEvento {
   padding-top: 10px;

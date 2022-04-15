@@ -9,6 +9,8 @@ import RowTablePilotsRankingsSingleEvent from './RowTablePilotsRankingsSingleEve
 function TablePilotsRankingsSingle(){
   const [lista, setListaCheck] = useState("");
   const [contatore, setContatore] = useState(0);
+  const [row, setRow] = useState("");
+
 
 
     
@@ -33,7 +35,8 @@ function TablePilotsRankingsSingle(){
               })
               .then((listaPilotiRanking) => {
             //   console.log(listaPilotiRanking)
-                setListaCheck(listaPilotiRanking)
+                setListaCheck(listaPilotiRanking);
+                setRow(listaPilotiRanking.length);
               
               })
            
@@ -54,11 +57,11 @@ function TablePilotsRankingsSingle(){
     return (
       
         
-          Object.keys(lista).map((pilotaRanking) =>{
+          Object.keys(lista).map((pilotaRanking, rowRanking) =>{
           //  console.log(lista[pilotaRanking]);   
           
 
-            return <RowTablePilotsRankingsSingleEvent key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankingsSingleEvent>
+            return <RowTablePilotsRankingsSingleEvent posizioneD={rowRanking + 1} key={pilotaRanking} {...lista[pilotaRanking]}></RowTablePilotsRankingsSingleEvent>
 
           })  
 

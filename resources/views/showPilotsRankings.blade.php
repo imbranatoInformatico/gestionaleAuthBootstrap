@@ -33,22 +33,23 @@
                  @endforeach
                 </select>
             </div>
+            
         </div>
         <div class="row pt-2  pe-3">
             <div class="col-12">
                 <table id="tablePilot" class="table">
                     <thead class="table-dark">
                       <tr class="">
-                          <td>POSIZIONE</td>
-                          <td>PILOTA</td>
-                          <td>RANK</td>
+                          <td class="text-center">POSIZIONE</td>
+                          <td class="text-center">PILOTA</td>
+                          <td class="text-center">RANK</td>
                           {{-- @foreach ($races as $race)
                               <td>{{$race->nome}}</td>
                           @endforeach     --}}   
-                          <td>PUNTI GARA TOTALI</td>
-                          <td>PUNTI PRESENZA</td>
-                          <td>PUNTI POLE POSITION</td>
-                          <td>TOTALE</td>
+                          <td class="text-center">PUNTI GARA TOTALI</td>
+                          <td class="text-center">PUNTI PRESENZA</td>
+                          <td class="text-center">PUNTI POLE POSITION</td>
+                          <td class="text-center">TOTALE</td>
                       </tr>
                     </thead>
                     <tbody id="tableReactRankings" class="table-light ">

@@ -17,6 +17,7 @@ class CreateRankingsTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('descrizione')->nullable();
+            $table->string('colore')->nullable();
             $table->unsignedBigInteger('idCategory');
             $table->unsignedBigInteger('idEvento');
             $table->foreign('idCategory')->references('id')->on('categories')->onCascade('delete');

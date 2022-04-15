@@ -80,6 +80,7 @@ Route::get('/rankingList/{codiceEvento}', [App\Http\Controllers\RankingControlle
 Route::get('/editRanking/{codiceEvento}/{id}', [App\Http\Controllers\RankingController::class, 'edit'])->name('editRanking');
 Route::put('/updateRanking/{id}', [App\Http\Controllers\RankingController::class, 'update'])->name('updateRanking');
 Route::delete('/deleteRanking/{id}', [App\Http\Controllers\RankingController::class, 'destroy'])->name('deleteRanking');
+
 /*****************************************************************/
 
 //rotte per punteggi********************************************
